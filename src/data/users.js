@@ -1,0 +1,38 @@
+export const users = [
+  {
+    id: 1,
+    firstName: "علی",
+    lastName: "محمدی",
+    phone: "09121111111",
+    email: "ali@example.com",
+    role: "admin",
+    isActive: true,
+  },
+  {
+    id: 2,
+    firstName: "سارا",
+    lastName: "احمدی",
+    phone: "09122222222",
+    email: "sara@example.com",
+    role: "customer",
+    isActive: true,
+  },
+  {
+    id: 3,
+    firstName: "رضا",
+    lastName: "کریمی",
+    phone: "09123333333",
+    email: "reza@example.com",
+    role: "customer",
+    isActive: true,
+  },
+  {
+    id: 4,
+    firstName: "مریم",
+    lastName: "حسینی",
+    phone: "09124444444",
+    email: "maryam@example.com",
+    role: "warehouse_manager",
+    isActive: true,
+  },
+];
