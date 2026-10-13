@@ -1,11 +1,13 @@
 import React from "react";
+import TopSideBare from "./components/TopSideBar";
 
+import Items from "./components/Items";
 function SideBar() {
   return (
     <div className="bg-primary w-60 h-screen">
-      <div className="flex items-center mx-auto w-fit">
-        <span className="text-white text-2xl font-bold">StoreFlow</span>
-        <img src="/icon/header-icon.webp" alt="" className="size-16" />
+      <TopSideBare />
+      <div className="flex items-center justify-center px-4">
+        <Items />
       </div>
     </div>
   );
