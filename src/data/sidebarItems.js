@@ -2,19 +2,19 @@ export const sidebarItems = [
   {
     id: 1,
     title: "داشبورد",
-    path: "/dashboard",
+    path: "/",
     icon: 'MdSpaceDashboard' ,
   },
   {
     id: 2,
     title: "محصولات",
-    path: "/products",
+    path: "/product",
     icon: 'AiFillProduct' ,
   },
   {
     id: 3,
     title: "انبار و موجودی",
-    path: "/inventory",
+    path: "/storeroom",
     icon: 'FaWarehouse' ,
   },
   {
@@ -38,7 +38,7 @@ export const sidebarItems = [
   {
     id: 7,
     title: "مشتریان",
-    path: "/customers",
+    path: "/users",
     icon: 'FaUser' ,
   },
   {
@@ -50,7 +50,7 @@ export const sidebarItems = [
   {
     id: 9,
     title: "تنظیمات",
-    path: "/settings",
+    path: "/setting",
     icon: 'IoIosSettings' ,
   },
 ];

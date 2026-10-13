@@ -30,13 +30,15 @@ function Items({ title, path, icon }) {
       to={path}
       className={({ isActive }) => {
         return clsx(
-          isActive ? "bg-accent" : "",
-          "text-lg text-white w-full py-2 flex items-center gap-4 pr-3 rounded-lg",
+          isActive
+            ? "bg-gradient-to-br from-green-400 via-green-500 to-green-600"
+            : "",
+          " text-white w-full py-2 flex items-center gap-4 pr-3 rounded-lg mt-1 ",
         );
       }}
     >
       <Icon />
-      {title}
+      <span className="text-sm">{title}</span>
     </NavLink>
   );
 }
