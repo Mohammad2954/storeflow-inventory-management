@@ -8,7 +8,7 @@ function Layout() {
     <>
       <div className="flex ">
         <SideBar />
-        <div>
+        <div className="w-full">
           <TopBar />
           <div>
             <Outlet />
