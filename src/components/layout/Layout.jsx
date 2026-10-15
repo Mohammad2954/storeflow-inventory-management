@@ -1,16 +1,21 @@
 import React from "react";
 import { Outlet } from "react-router";
 import SideBar from "../../feacher/SideBar/SideBar";
+import TopBar from "../../feacher/TopBar/TopBar";
 
 function Layout() {
   return (
-    <div>
-      <SideBar />
-      {/* <TopBar/> */}
-      <div>
-        <Outlet />
+    <>
+      <div className="flex ">
+        <SideBar />
+        <div>
+          <TopBar />
+          <div>
+            <Outlet />
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
