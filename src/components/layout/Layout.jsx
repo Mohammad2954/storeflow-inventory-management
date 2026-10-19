@@ -10,7 +10,7 @@ function Layout() {
         <SideBar />
         <div className="w-full">
           <TopBar />
-          <div>
+          <div className="p-4">
             <Outlet />
           </div>
         </div>
