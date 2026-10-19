@@ -1,7 +1,21 @@
+import clsx from "clsx";
 import React from "react";
 
-function ShortcutItems() {
-  return <div>ShortcutItems</div>;
+function ShortcutItems({ title, icon: Icon, path, color, bgColor }) {
+  return (
+    <div
+      className={clsx(
+        bgColor,
+        color,
+        "flex items-center justify-center rounded-3xl py-8",
+      )}
+    >
+      <div className="flex flex-col items-center gap-3">
+        <Icon className={"size-10"} />
+        <span>{title}</span>
+      </div>
+    </div>
+  );
 }
 
 export default ShortcutItems;
