@@ -27,30 +27,6 @@ const salesData = [
   { day: "شنبه", sales: 9.8 },
 ];
 
-const summaryItems = [
-  {
-    title: "بیشترین فروش",
-    value: "9.8M",
-    description: "شنبه",
-    icon: FiShoppingCart,
-  },
-  {
-    title: "میانگین فروش روزانه",
-    value: "6.2M",
-    icon: FiCalendar,
-  },
-  {
-    title: "مجموع فروش هفته",
-    value: "43.5M",
-    icon: FiDollarSign,
-  },
-  {
-    title: "درصد رشد فروش",
-    value: "+45%",
-    icon: FiTrendingUp,
-  },
-];
-
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
 
@@ -73,7 +49,7 @@ function LineChart() {
 
         <button
           type="button"
-          className="flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 transition hover:border-green-300 hover:bg-green-50"
+          className=" cursor-pointer flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 transition hover:border-green-300 hover:bg-green-50"
         >
           <FiCalendar className="text-green-600" />
           هفته اخیر
@@ -149,44 +125,6 @@ function LineChart() {
             />
           </AreaChart>
         </ResponsiveContainer>
-      </div>
-
-      {/* Summary Cards */}
-      <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 ">
-        {summaryItems.map((item) => {
-          const Icon = item.icon;
-
-          return (
-            <div
-              key={item.title}
-              className="flex items-center gap-3 rounded-xl border border-green-100 bg-green-50/70 p-4 transition hover:bg-green-50"
-            >
-              <div className="flex  shrink-0 items-center justify-center rounded-xl bg-white text-xl text-green-600 shadow-sm">
-                <Icon />
-              </div>
-
-              <div className="min-w-0">
-                <p className="text-sm text-gray-500">{item.title}</p>
-
-                <p
-                  className={`mt-1 text-xl font-bold ${
-                    item.value.startsWith("+")
-                      ? "text-green-600"
-                      : "text-gray-900"
-                  }`}
-                >
-                  {item.value}
-                </p>
-
-                {item.description && (
-                  <p className="mt-0.5 text-xs text-gray-500">
-                    ({item.description})
-                  </p>
-                )}
-              </div>
-            </div>
-          );
-        })}
       </div>
     </section>
   );

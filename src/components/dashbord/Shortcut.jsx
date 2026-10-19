@@ -41,7 +41,7 @@ function Shortcut() {
     },
   ];
   return (
-    <div className="w-full border p-4">
+    <div className="w-full border border-gray-100 bg-white p-4 shadow-sm">
       <h2 className="mb-4 text-xl font-bold pr-1">میانبر ها</h2>
       <div className="grid grid-cols-2 gap-2">
         {quickActions.map((item) => {
