@@ -4,7 +4,7 @@ import ProductContainer from "../components/Product/ProductContainer";
 
 function Products() {
   return (
-    <div>
+    <div className="">
       <TopPage name={"محصولات"} btn={"افزودن محصول"} />
       <ProductContainer />
     </div>

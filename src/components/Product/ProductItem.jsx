@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import React from "react";
 import { MdOutlineEditNote } from "react-icons/md";
 import { TbTrash } from "react-icons/tb";
 
