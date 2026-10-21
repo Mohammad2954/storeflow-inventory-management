@@ -1,7 +1,11 @@
-import React from "react";
+import TopPage from "../feature/components/TopPage";
 
 function StoreRoom() {
-  return <div>StoreRoom</div>;
+  return (
+    <div>
+      <TopPage name={"انبار و موجودی"} />
+    </div>
+  );
 }
 
 export default StoreRoom;
