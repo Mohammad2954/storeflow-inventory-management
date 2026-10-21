@@ -6,7 +6,7 @@ function SideBar() {
   console.log(sidebarItems);
 
   return (
-    <div className="bg-primary w-60 h-screen">
+    <div className="bg-primary w-60 h-screen fixed right-0">
       <TopSideBare />
       <div className="flex-col items-center justify-center px-4">
         {sidebarItems.map((item) => {
