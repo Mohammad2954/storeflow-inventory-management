@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { MdOutlineEditNote } from "react-icons/md";
+import { MdOutlineEditNote, MdOutlineModeEditOutline } from "react-icons/md";
 import { TbTrash } from "react-icons/tb";
 
 function ProductItem({
@@ -48,8 +48,9 @@ function ProductItem({
       <td>{date}</td>
       <td>
         <div className="flex items-center justify-center gap-3">
-          <TbTrash className="text-red-600 size-6" />
-          <MdOutlineEditNote className="text-blue-600 size-6" />
+          <TbTrash className="text-gray-400 size-5" />
+          <MdOutlineModeEditOutline className="text-gray-400 size-5" />
+          {/* <MdOutlineEditNote className="text-blue-600 size-6" /> */}
         </div>
       </td>
     </tr>
