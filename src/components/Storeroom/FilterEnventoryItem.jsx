@@ -28,7 +28,7 @@ function FilterEnventoryItem() {
           <FaAngleDown />
         </div>
       </div>
-      <button className="flex items-center gap-4 text-sm border bg-gray-200 border-gray-300 shadow-sm px-4 py-2 rounded-lg w-72">
+      <button className="flex items-center gap-4 text-sm border bg-gray-200 border-gray-300 dark:bg-gray-800 shadow-sm px-4 py-2 rounded-lg w-72">
         <TbFilterMinus />
         پاک کردن فیلتر ها
       </button>

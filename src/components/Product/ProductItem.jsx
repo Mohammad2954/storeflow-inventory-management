@@ -2,10 +2,21 @@ import clsx from "clsx";
 import { MdOutlineEditNote } from "react-icons/md";
 import { TbTrash } from "react-icons/tb";
 
-function ProductItem({ id, name, image, date, price, stock, Status }) {
+function ProductItem({
+  id,
+  name,
+  sku,
+  category,
+  image,
+  date,
+  price,
+  stock,
+  Status,
+  isActive,
+  unit,
+}) {
   return (
     <tr className="text-center mt-2 border-t border-gray-200">
-      <td className="">{id}</td>
       <td className="py-2">
         <img
           src={image}
@@ -14,9 +25,10 @@ function ProductItem({ id, name, image, date, price, stock, Status }) {
         />
       </td>
       <td>{name}</td>
-      <td>{date}</td>
+      <td>{sku}</td>
+      <td>{category}</td>
       <td>{price.toLocaleString()}</td>
-      <td>{stock}</td>
+      <td>{`${stock} ${unit}`}</td>
       <td>
         <span
           className={clsx(
@@ -33,6 +45,7 @@ function ProductItem({ id, name, image, date, price, stock, Status }) {
           {Status}
         </span>
       </td>
+      <td>{date}</td>
       <td>
         <div className="flex items-center justify-center gap-3">
           <TbTrash className="text-red-600 size-6" />

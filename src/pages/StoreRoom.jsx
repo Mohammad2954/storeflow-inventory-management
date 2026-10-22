@@ -5,7 +5,7 @@ function StoreRoom() {
   return (
     <>
       <div>
-        <TopPage name={"انبار و موجودی"} />
+        <TopPage name={"انبار و موجودی"} btn={"افزودن موجودی"} />
       </div>
       <div>
         <StoreRoomContainer />
