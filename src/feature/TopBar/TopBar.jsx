@@ -22,17 +22,17 @@ function TopBar() {
       <SearchBar />
       <div className="flex items-center gap-2">
         <div
-          className="bg-gray-100 rounded-full p-2 cursor-pointer"
+          className="bg-gray-100 dark:bg-gray-600 rounded-full p-2 cursor-pointer"
           onClick={() => {
             ChangeThem();
           }}
         >
           {them === "sun" ? <FaRegMoon /> : <FaSun />}
         </div>
-        <div className="bg-gray-100 rounded-full p-2">
+        <div className="bg-gray-100 dark:bg-gray-600 rounded-full p-2">
           <BiCommentDetail />
         </div>
-        <div className="bg-gray-100 rounded-full p-2 relative">
+        <div className="bg-gray-100 dark:bg-gray-600 rounded-full p-2 relative">
           <div className="bg-green-300 text-center rounded-full w-4 h-4 text-[10px] flex items-center justify-center text-white absolute -right-0.5 -top-0.5">
             3
           </div>
