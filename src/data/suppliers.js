@@ -1,4 +1,4 @@
-```js
+
 export const suppliers = [
   {
     id: 1,
@@ -241,4 +241,3 @@ export const suppliers = [
     description: "تأمین اقلام عمومی؛ همکاری فعلاً غیرفعال است",
   },
 ];
-```
