@@ -23,8 +23,8 @@ function StoreRoomContainer() {
                   <th>موجودی</th>
                   <th>حداقل موجودی</th>
                   <th>حداکثر موجودی</th>
-                  <th>واحد </th>
                   <th>انبار</th>
+                  <th>واحد </th>
                   <th>اخرین بروزرسانی</th>
                   <th>وضعیت</th>
                   <th>عملیات</th>
