@@ -14,16 +14,17 @@ function EnventoryItem({
   status,
   sku,
   unit,
+  productId,
 }) {
   return (
     <tr className="text-center mt-2 border-t border-gray-200">
       {/* <td className="">{id}</td> */}
-      <td className="py-2">
-        {/* <img
-          src={image}
+      <td className="py-2 flex items-center gap-2 pr-3">
+        <img
+          src={`enventory/${productId}.jpg`}
           alt={`${productName}`}
-          className="w-[60px] h-[60px] m-auto  rounded-sm shadow-sm"
-        /> */}
+          className="w-[60px] h-[60px]  rounded-sm shadow-sm"
+        />
         <span>{productName}</span>
       </td>
       <td>{sku}</td>

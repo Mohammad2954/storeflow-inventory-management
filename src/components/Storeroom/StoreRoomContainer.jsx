@@ -5,6 +5,7 @@ import Counter from "../../feature/components/Counter";
 import { inventoryData } from "../../data/inventoryData";
 import ProductItem from "../Product/ProductItem";
 import EnventoryItem from "./EnventoryItem";
+import FilterEnventoryItem from "./FilterEnventoryItem";
 
 function StoreRoomContainer({
   productName,
@@ -21,7 +22,8 @@ function StoreRoomContainer({
   return (
     <div>
       <>
-        <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8">
+        <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">
+          <FilterEnventoryItem />
           <table className="w-full shadow-sm ">
             <thead>
               <tr className="text-gray-600 bg-gray-300 dark:bg-gray-800 dark:text-white rounded-t-2xl text-center">
