@@ -11,7 +11,7 @@ function FilterEnventoryItem() {
         <input
           className=" border border-gray-300 outline-none py-2 px-4 rounded-xl text-sm pr-6 w-full"
           type="text"
-          placeholder="جستجو در محصولات ..."
+          placeholder="جستجو نام یا کد ..."
         />
       </div>
       <div className="flex items-center gap-4 w-full pr-4">

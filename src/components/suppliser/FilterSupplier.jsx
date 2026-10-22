@@ -1,4 +1,7 @@
 import React from "react";
+import { CiSearch } from "react-icons/ci";
+import { FaAngleDown } from "react-icons/fa";
+import { TbFilterMinus } from "react-icons/tb";
 
 function FilterSupplier() {
   return (
@@ -8,7 +11,7 @@ function FilterSupplier() {
         <input
           className=" border border-gray-300 outline-none py-2 px-4 rounded-xl text-sm pr-6 w-full"
           type="text"
-          placeholder="جستجو در محصولات ..."
+          placeholder="جستجو نام کد یا شماره تماس  ..."
         />
       </div>
       <div className="flex items-center gap-4 w-full pr-4">
@@ -16,10 +19,7 @@ function FilterSupplier() {
           <span>همه وضعیت ها</span>
           <FaAngleDown />
         </div>
-        <div className="flex items-center gap-4 text-sm border border-gray-300 shadow-sm px-4 py-2 rounded-lg">
-          <span>همه انبار ها</span>
-          <FaAngleDown />
-        </div>
+
         <div className="flex items-center gap-4 text-sm border border-gray-300 shadow-sm px-4 py-2 rounded-lg">
           <span>دسته بندی ها</span>
           <FaAngleDown />

@@ -9,7 +9,7 @@ import Counter from "../../feature/components/Counter.jsx";
 function SuppliserContainer() {
   return (
     <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">
-      {/* <FilterSupplier /> */}
+      <FilterSupplier />
       <div className="px-4 rounded-t-2xl overflow-hidden border-gray-200 pb-4">
         <table className="w-full shadow-sm  rounded-t-2xl overflow-hidden">
           <thead>
