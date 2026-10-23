@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CiSearch } from "react-icons/ci";
 
 function DateOfReport() {
   const [firstValINput, setFirstValINput] = useState("01");
@@ -13,9 +14,12 @@ function DateOfReport() {
         مشاهده وتحلیل اطلاعات فروشگاه در بازه های زمانی مختلف
       </span>
       <div className="flex items-center gap-2 border border-gray-300 shadow-sm rounded-lg px-4 py-2">
+        <div className="bg-green-200  rounded-lg p-2 ml-4 cursor-pointer">
+          <CiSearch className=" text-black size-4.5" />
+        </div>
         <div className="flex items-center gap-1">
           <input
-            type="number"
+            type="text"
             className="w-5 outline-none"
             max="2"
             placeholder="21"
@@ -28,7 +32,7 @@ function DateOfReport() {
           />
           /
           <input
-            type="number"
+            type="text"
             className="w-5 outline-none"
             max="2"
             placeholder="05"
@@ -41,7 +45,7 @@ function DateOfReport() {
           />
           /
           <input
-            type="number"
+            type="text"
             className="w-8 outline-none"
             max="4"
             placeholder="1404"
@@ -56,7 +60,7 @@ function DateOfReport() {
         -
         <div className="flex items-center gap-1">
           <input
-            type="number"
+            type="text"
             className="w-5 outline-none"
             max="2"
             placeholder="21"
@@ -69,7 +73,7 @@ function DateOfReport() {
           />
           /
           <input
-            type="number"
+            type="text"
             className="w-5 outline-none"
             max="2"
             placeholder="05"
@@ -82,7 +86,7 @@ function DateOfReport() {
           />
           /
           <input
-            type="number"
+            type="text"
             className="w-8 outline-none"
             max="4"
             placeholder="1404"
