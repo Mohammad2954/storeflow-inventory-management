@@ -1,6 +1,9 @@
 import React from "react";
+import { CiSearch } from "react-icons/ci";
+import { FaAngleDown } from "react-icons/fa";
+import { TbFilterMinus } from "react-icons/tb";
 
-function FilterEnventoryItem() {
+function FilterReportItem() {
   return (
     <div className="flex items-center p-4">
       <div className="flex items-center relative w-xl">
@@ -16,10 +19,7 @@ function FilterEnventoryItem() {
           <span>همه وضعیت ها</span>
           <FaAngleDown />
         </div>
-        <div className="flex items-center gap-4 text-sm border border-gray-300 shadow-sm px-4 py-2 rounded-lg">
-          <span>همه انبار ها</span>
-          <FaAngleDown />
-        </div>
+
         <div className="flex items-center gap-4 text-sm border border-gray-300 shadow-sm px-4 py-2 rounded-lg">
           <span>دسته بندی ها</span>
           <FaAngleDown />
@@ -33,4 +33,4 @@ function FilterEnventoryItem() {
   );
 }
 
-export default FilterEnventoryItem;
+export default FilterReportItem;

@@ -6,6 +6,7 @@ import Counter from "../../feature/components/Counter";
 import InfoCounter from "../../feature/components/InfoCounter";
 import { productSalesReport } from "../../data/productSalesReport ";
 import SalesReportItem from "./components/SalesReportItem";
+import FilterReportItem from "./components/FilterReportItem";
 
 function ReportContainer() {
   return (
@@ -19,6 +20,7 @@ function ReportContainer() {
       </div>
       <div>
         <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">
+          <FilterReportItem />
           <div className="px-4 rounded-t-2xl overflow-hidden border-gray-200 pb-4">
             <table className="w-full shadow-sm  rounded-t-2xl overflow-hidden">
               <thead>

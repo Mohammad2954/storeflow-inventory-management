@@ -15,8 +15,6 @@ function SalesReportItem({
   profit,
   status,
 }) {
-  console.log(image);
-
   return (
     <tr className="text-center mt-2 border-t border-gray-200">
       <td className="px-2">{id}</td>
