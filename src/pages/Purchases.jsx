@@ -1,10 +1,16 @@
 import React from "react";
 import TopPage from "../feature/components/TopPage";
+import { FaTruck } from "react-icons/fa6";
+import PurchasesContainer from "../components/PurchasesContainer/PurchasesContainer";
 
 function Purchases() {
   return (
-    <div>
-      <TopPage name={"خرید ها"} />
+    <div className="">
+      <div className="flex items-center px-8 gap-2">
+        <FaTruck className="size-8" />
+        <TopPage name={"خرید و تامین کالا"} />
+      </div>
+      <PurchasesContainer />
     </div>
   );
 }
