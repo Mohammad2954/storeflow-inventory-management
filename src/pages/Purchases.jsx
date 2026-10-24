@@ -8,7 +8,7 @@ function Purchases() {
     <div className="">
       <div className="flex items-center px-8 gap-2">
         <FaTruck className="size-8" />
-        <TopPage name={"خرید و تامین کالا"} />
+        <TopPage name={"خرید و تامین کالا"} btn={"ثبت خرید جدید"} />
       </div>
       <PurchasesContainer />
     </div>

@@ -68,7 +68,7 @@ export const purchases = [
     orderDate: "1405/07/21",
     expectedDate: "1405/07/26",
     receivedDate: null,
-    status: "در حال دریافت",
+    status: "در انتظار دریافت",
     itemsCount: 15,
     totalAmount: 8250000,
     shippingCost: 200000,

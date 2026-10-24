@@ -21,9 +21,11 @@ function FilterPurchasesItem() {
           <span>همه وضعیت ها</span>
           <FaAngleDown />
         </div>
-        <div>
-          <FindDate />
+        <div className="flex items-center gap-4 text-sm border border-gray-300 shadow-sm px-4 py-2 rounded-lg">
+          <span>تامین کننده</span>
+          <FaAngleDown />
         </div>
+        <div>{/* <FindDate /> */}</div>
       </div>
       <button className="flex items-center gap-4 text-sm border bg-gray-200 border-gray-300 dark:bg-gray-800 shadow-sm px-4 py-2 rounded-lg w-72">
         <TbFilterMinus />

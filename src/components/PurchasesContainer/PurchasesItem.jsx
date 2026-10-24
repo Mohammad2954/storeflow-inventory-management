@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React from "react";
 import { FaEye } from "react-icons/fa6";
 import { HiDotsVertical } from "react-icons/hi";
@@ -26,7 +27,22 @@ function PurchasesItem({
       <td>{orderDate}</td>
       <td>{itemsCount}</td>
       <td>{totalAmount.toLocaleString()}</td>
-      <td>{status}</td>
+      <td>
+        <span
+          className={clsx(
+            status === "تکمیل‌شده"
+              ? "bg-success-bg text-success"
+              : status === "در انتظار دریافت"
+                ? "bg-warning-bg text-warning"
+                : status === "لغوشده"
+                  ? "bg-danger-bg text-danger"
+                  : "",
+            "rounded-full py-2 px-4 text-sm",
+          )}
+        >
+          {status}
+        </span>
+      </td>
       <td>{receivedDate ? receivedDate : "دریافت نشده"}</td>
       <td>
         <div className="flex items-center justify-center gap-3">
