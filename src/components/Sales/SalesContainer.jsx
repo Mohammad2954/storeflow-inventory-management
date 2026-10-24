@@ -6,12 +6,17 @@ import { salesInvoices } from "../../data/salesInvoices";
 import SalesItem from "./SalesItem";
 import InfoCounter from "../../feature/components/InfoCounter";
 import Counter from "../../feature/components/Counter";
+import { categorySales } from "../../data/reportData";
 
 function SalesContainer() {
   return (
     <div>
       <div className="grid grid-cols-2 gap-6 mt-8">
-        <CategorySalesChart />
+        <CategorySalesChart
+          data={categorySales}
+          info={" فروش بر اساس دسته‌بندی"}
+          description={" سهم هر دسته از مجموع فروش"}
+        />
         <LineChartReports />
       </div>
       <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">

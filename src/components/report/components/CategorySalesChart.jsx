@@ -7,34 +7,31 @@ import {
   Legend,
 } from "recharts";
 
-import { categorySales } from "../../../data/reportData.js";
-
-function CategorySalesChart() {
-  const totalSales = categorySales.reduce(
-    (total, item) => total + item.sales,
-    0,
-  );
+function CategorySalesChart({ data, info, description }) {
+  let totalDeta = data;
+  const totalSales = totalDeta.reduce((total, item) => total + item.sales, 0);
 
   const formatPrice = (value) => new Intl.NumberFormat("fa-IR").format(value);
 
   return (
-    <div className="w-full rounded-2xl border border-gray-200 dark:text-white p-5 shadow-sm">
+    <div className="w-full rounded-2xl border border-gray-200 dark:text-white p-5 shadow-sm h-full">
       {/* عنوان */}
       <div className="mb-5">
         <h2 className="text-lg font-bold text-gray-800 dark:text-white">
-          فروش بر اساس دسته‌بندی
+          {info}
         </h2>
-
-        <p className="mt-1 text-sm text-gray-500 dark:text-white">
-          سهم هر دسته از مجموع فروش
-        </p>
+        {description ? (
+          <p className="mt-1 text-sm text-gray-500 dark:text-white">
+            {description}
+          </p>
+        ) : null}
       </div>
 
       {/* نمودار و اطلاعات دسته‌ها */}
       <div className="flex flex-col items-center gap-5 sm:flex-row">
         {/* راهنمای دسته‌بندی‌ها */}
         <div className="w-full flex-1 space-y-4">
-          {categorySales.map((item) => (
+          {totalDeta.map((item) => (
             <div
               key={item.id}
               className="flex items-center justify-between gap-3"
@@ -68,7 +65,7 @@ function CategorySalesChart() {
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
-                data={categorySales}
+                data={totalDeta}
                 dataKey="sales"
                 nameKey="name"
                 cx="50%"
@@ -78,7 +75,7 @@ function CategorySalesChart() {
                 paddingAngle={3}
                 stroke="none"
               >
-                {categorySales.map((item) => (
+                {totalDeta.map((item) => (
                   <Cell key={item.id} fill={item.color} />
                 ))}
               </Pie>

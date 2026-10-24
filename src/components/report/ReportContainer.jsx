@@ -7,6 +7,7 @@ import InfoCounter from "../../feature/components/InfoCounter";
 import { productSalesReport } from "../../data/productSalesReport ";
 import SalesReportItem from "./components/SalesReportItem";
 import FilterReportItem from "./components/FilterReportItem";
+import { categorySales } from "../../data/reportData";
 
 function ReportContainer() {
   return (
@@ -15,7 +16,11 @@ function ReportContainer() {
         <DateOfReport />
       </div>
       <div className="grid grid-cols-2 gap-6 mt-8">
-        <CategorySalesChart />
+        <CategorySalesChart
+          data={categorySales}
+          info={" فروش بر اساس دسته‌بندی"}
+          description={" سهم هر دسته از مجموع فروش"}
+        />
         <LineChartReports />
       </div>
       <div>
