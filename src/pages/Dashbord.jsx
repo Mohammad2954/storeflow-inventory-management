@@ -14,10 +14,13 @@ import SalesLastItem from "../components/dashbord/SalesLastItem.jsx";
 import LatestActivities from "../components/dashbord/LatestActivities.jsx";
 import { dashboardCards } from "../data/dashboardCards.js";
 import Card from "../components/dashbord/Card.jsx";
+import { useLocation } from "react-router";
+import CardSection from "../feature/Cards/CardSection.jsx";
 
 function Dashbord() {
   return (
     <>
+      <CardSection />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-5">
           <CategorySalesChart data={paymentMethods} info={"روش های پرداخت"} />
