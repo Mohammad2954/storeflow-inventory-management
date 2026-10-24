@@ -11,11 +11,14 @@ import { salesInvoices } from "../data/salesInvoices.js";
 import { FaArrowLeft } from "react-icons/fa";
 import { IoDocumentsOutline } from "react-icons/io5";
 import SalesLastItem from "../components/dashbord/SalesLastItem.jsx";
+import LatestActivities from "../components/dashbord/LatestActivities.jsx";
+import { dashboardCards } from "../data/dashboardCards.js";
+import Card from "../components/dashbord/Card.jsx";
 
 function Dashbord() {
   return (
     <>
-      <div className="grid grid-cols-12 gap-6">
+      <div className="grid grid-cols-12 gap-4">
         <div className="col-span-5">
           <CategorySalesChart data={paymentMethods} info={"روش های پرداخت"} />
         </div>
@@ -23,7 +26,7 @@ function Dashbord() {
           <LineChartReports />
         </div>
       </div>
-      <div className="grid grid-cols-12 mt-4 gap-6">
+      <div className="grid grid-cols-12 mt-4 gap-4">
         <div className="col-span-4">
           <Shortcut />
         </div>
@@ -46,6 +49,7 @@ function Dashbord() {
                   <th>تاریخ</th>
                   <th>مشتری</th>
                   <th>مبلغ کل</th>
+
                   <th>روش پرداخت</th>
                   <th>وضعیت</th>
                   <th>عملیات</th>
@@ -63,6 +67,16 @@ function Dashbord() {
             <Counter />
           </div>
         </div>
+      </div>
+      <div className="grid grid-cols-12 gap-4">
+        <div className="col-span-4 -mt-[363px]">
+          <LatestActivities />
+        </div>
+      </div>
+      <div className="grid grid-cols-12 gap-4 mt-4">
+        {dashboardCards.map((item) => {
+          return <Card key={item.id} {...item} />;
+        })}
       </div>
     </>
   );
