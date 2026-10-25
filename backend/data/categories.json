@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "نوشیدنی",
+    "slug": "drinks",
+    "description": "محصولات دسته نوشیدنی",
+    "isActive": true
+  },
+  {
+    "id": 2,
+    "name": "لوازم آشپزخانه",
+    "slug": "kitchenware",
+    "description": "محصولات دسته لوازم آشپزخانه",
+    "isActive": true
+  },
+  {
+    "id": 3,
+    "name": "لوازم تحریر",
+    "slug": "stationery",
+    "description": "محصولات دسته لوازم تحریر",
+    "isActive": true
+  },
+  {
+    "id": 4,
+    "name": "لوازم دیجیتال",
+    "slug": "electronics",
+    "description": "محصولات دسته لوازم دیجیتال",
+    "isActive": true
+  },
+  {
+    "id": 5,
+    "name": "لوازم شخصی",
+    "slug": "personal-items",
+    "description": "محصولات دسته لوازم شخصی",
+    "isActive": true
+  },
+  {
+    "id": 6,
+    "name": "لوازم خانه",
+    "slug": "home",
+    "description": "محصولات دسته لوازم خانه",
+    "isActive": true
+  }
+]

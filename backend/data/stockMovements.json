@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "productId": 1,
+    "type": "in",
+    "quantity": 20,
+    "reason": "purchase",
+    "referenceId": 1,
+    "createdAt": "2026-10-14T09:00:00"
+  },
+  {
+    "id": 2,
+    "productId": 1,
+    "type": "out",
+    "quantity": 3,
+    "reason": "sale",
+    "referenceId": 3,
+    "createdAt": "2026-10-15T10:35:00"
+  },
+  {
+    "id": 3,
+    "productId": 3,
+    "type": "in",
+    "quantity": 40,
+    "reason": "purchase",
+    "referenceId": 4,
+    "createdAt": "2026-10-11T12:00:00"
+  },
+  {
+    "id": 4,
+    "productId": 5,
+    "type": "out",
+    "quantity": 2,
+    "reason": "sale",
+    "referenceId": 2,
+    "createdAt": "2026-10-16T11:00:00"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "orderId": 1001,
+    "productId": 1,
+    "quantity": 1,
+    "unitPrice": 450000
+  },
+  {
+    "id": 2,
+    "orderId": 1001,
+    "productId": 4,
+    "quantity": 1,
+    "unitPrice": 120000
+  },
+  {
+    "id": 3,
+    "orderId": 1002,
+    "productId": 3,
+    "quantity": 1,
+    "unitPrice": 195000
+  },
+  {
+    "id": 4,
+    "orderId": 1003,
+    "productId": 7,
+    "quantity": 1,
+    "unitPrice": 2100000
+  }
+]

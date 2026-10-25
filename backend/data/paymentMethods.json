@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "نقدی",
+    "sales": 6625000,
+    "percentage": 47,
+    "color": "#16a34a"
+  },
+  {
+    "id": 2,
+    "name": "کارت‌خوان",
+    "sales": 7530000,
+    "percentage": 53,
+    "color": "#3b82f6"
+  },
+  {
+    "id": 3,
+    "name": "چک",
+    "sales": 0,
+    "percentage": 0,
+    "color": "#f59e0b"
+  },
+  {
+    "id": 4,
+    "name": "سایر",
+    "sales": 0,
+    "percentage": 0,
+    "color": "#a855f7"
+  }
+]

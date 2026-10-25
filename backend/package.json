@@ -1,0 +1,27 @@
+{
+  "name": "storeflow-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "StoreFlow inventory and store management API",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check routes/sales.js && node --check routes/purchases.js && node --check routes/finance.js",
+    "postinstall": "prisma skills sync || exit 0"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.10.1",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "prisma": "^7.10.1"
+  },
+  "allowScripts": {
+    "prisma@7.10.1": true,
+    "@prisma/engines@7.10.1": true
+  }
+}
