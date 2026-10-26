@@ -1,9 +1,203 @@
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "mysql"
+}
+model Category {
+  id          Int     @id @default(autoincrement())
+  name        String
+  slug        String  @unique
+  description String?
+  isActive    Boolean @default(true)
+}
+
+model Product {
+  id          Int     @id @default(autoincrement())
+  name        String
+  sku         String  @unique
+  category    String
+  image       String?
+  date        String?
+  price       Int
+  costPrice   Int?
+  averageCost Int?
+  stock       Int     @default(0)
+  unit        String?
+  minStock    Int     @default(0)
+  status      String  @default("موجود")
+  isActive    Boolean @default(true)
+
+  inventory      InventoryItem?
+  stockMovements StockMovement[]
+}
+
+model InventoryItem {
+  id          Int     @id @default(autoincrement())
+  productId   Int     @unique
+  productName String
+  sku         String?
+  category    String?
+  quantity    Int     @default(0)
+  minQuantity Int     @default(0)
+  maxQuantity Int?
+  unit        String?
+  warehouse   String?
+  lastUpdated String?
+  status      String?
+
+  product Product @relation(fields: [productId], references: [id])
+}
+
+model StockMovement {
+  id          Int    @id @default(autoincrement())
+  productId   Int
+  type        String
+  quantity    Int
+  reason      String
+  referenceId Int?
+  createdAt   String
+
+  product Product @relation(fields: [productId], references: [id])
+}
+
+model Supplier {
+  id             Int     @id @default(autoincrement())
+  code           String  @unique
+  name           String
+  contactPerson  String?
+  phone          String?
+  mobile         String?
+  email          String?
+  province       String?
+  city           String?
+  address        String?
+  postalCode     String?
+  category       String?
+  productsCount  Int?
+  totalPurchases Int?
+  paidAmount     Int?
+  debt           Int?
+  paymentTerm    String?
+  lastPurchaseDate String?
+  startDate      String?
+  status         String  @default("active")
+  rating         Float?
+  description    String?
+
+  purchases Purchase[]
+}
+
+model Customer {
+  id               Int     @id @default(autoincrement())
+  code             String  @unique
+  name             String
+  phone            String?
+  email            String?
+  type             String?
+  city             String?
+  address          String?
+  totalOrders      Int?
+  totalPurchases   Int?
+  paidAmount       Int?
+  debt             Int?
+  lastPurchaseDate String?
+  registerDate     String?
+  status           String  @default("active")
+  notes            String?
+
+  sales SalesInvoice[]
+}
+
+model Purchase {
+  id              Int     @id @default(autoincrement())
+  orderNumber     String? @unique
+  supplierId      Int?
+  supplierName    String?
+  date            String?
+  orderDate       String?
+  expectedDate    String?
+  receivedDate    String?
+  receivedAt      String?
+  status          String
+  itemsCount      Int?
+  items           Json
+  subtotal        Int?
+  totalAmount     Int
+  total           Int?
+  shippingCost    Int     @default(0)
+  paidAmount      Int     @default(0)
+  remainingAmount Int?
+  paymentStatus   String?
+  description     String?
+
+  supplier Supplier? @relation(fields: [supplierId], references: [id], onDelete: SetNull)
+}
+
+model SalesInvoice {
+  id              Int     @id @default(autoincrement())
+  invoiceNumber   String  @unique
+  customerId      Int?
+  customer        String?
+  date            String
+  time            String?
+  items           Json
+  itemsCount      Int?
+  subtotal        Int?
+  discount        Int?
+  discountAmount  Int?
+  totalAmount     Int
+  total           Int?
+  paidAmount      Int     @default(0)
+  remainingAmount Int?
+  paymentStatus   String?
+  status          String
+  paymentMethod   String?
+  description     String?
+  costAmount      Int?
+  profitAmount    Int?
+
+  customerRecord Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+}
+
+model Payment {
+  id          Int    @id @default(autoincrement())
+  type        String
+  referenceId Int
+  amount      Int
+  method      String
+  date        String
+  description String?
+  customerId  Int?
+  supplierId  Int?
+}
+
+model SalesReturn {
+  id            Int     @id @default(autoincrement())
+  referenceId   Int
+  invoiceNumber String?
+  customerId    Int?
+  date          String
+  type          String
+  reason        String?
+  refundMethod  String?
+  items         Json
+  totalAmount   Int
+  refundAmount  Int?
+  status        String
+}
+
+model PurchaseReturn {
+  id           Int     @id @default(autoincrement())
+  referenceId  Int
+  supplierId   Int?
+  date         String
+  type         String
+  reason       String?
+  refundMethod String?
+  items        Json
+  totalAmount  Int
+  refundAmount Int?
+  status       String
 }
