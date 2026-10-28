@@ -1,12 +1,9 @@
-import React from "react";
 import Shortcut from "../components/dashbord/Shortcut";
-import Summery from "../components/dashbord/Summery";
 import CategorySalesChart from "../components/report/components/CategorySalesChart";
 import LineChartReports from "../components/report/components/LineChartReports";
 import { paymentMethods } from "../data/paymentMethods.js";
 import Counter from "../feature/components/Counter.jsx";
 import InfoCounter from "../feature/components/InfoCounter.jsx";
-import SalesItem from "../components/Sales/SalesItem.jsx";
 import { salesInvoices } from "../data/salesInvoices.js";
 import { FaArrowLeft } from "react-icons/fa";
 import { IoDocumentsOutline } from "react-icons/io5";
@@ -14,8 +11,9 @@ import SalesLastItem from "../components/dashbord/SalesLastItem.jsx";
 import LatestActivities from "../components/dashbord/LatestActivities.jsx";
 import { dashboardCards } from "../data/dashboardCards.js";
 import Card from "../components/dashbord/Card.jsx";
-import { useLocation } from "react-router";
 import CardSection from "../feature/Cards/CardSection.jsx";
+import { data } from "react-router";
+import { getData } from "../feature/Getdata/getData.js";
 
 function Dashbord() {
   return (

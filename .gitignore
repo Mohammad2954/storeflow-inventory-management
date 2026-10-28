@@ -22,3 +22,23 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local database files and backups
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+
+# Prisma local files
+/backend/prisma/*.db
+
+# Logs
+/backend/logs/

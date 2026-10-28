@@ -11,7 +11,7 @@ function ProductItem({
   date,
   price,
   stock,
-  Status,
+  status,
   isActive,
   unit,
 }) {
@@ -32,17 +32,17 @@ function ProductItem({
       <td>
         <span
           className={clsx(
-            Status === "موجود"
+            status === "موجود"
               ? "bg-success-bg text-success"
-              : Status === "رو به اتمام"
+              : status === "رو به اتمام"
                 ? "bg-warning-bg text-warning"
-                : Status === "ناموجود"
+                : status === "ناموجود"
                   ? "bg-danger-bg text-danger"
                   : "",
             "rounded-full py-2 px-4 text-sm",
           )}
         >
-          {Status}
+          {status}
         </span>
       </td>
       <td>{date}</td>

@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductItem from "./ProductItem";
-import { products } from "../../data/products";
 import Counter from "../../feature/components/Counter";
 import InfoCounter from "../../feature/components/InfoCounter";
 import FilterEnventoryItem from "../Storeroom/FilterEnventoryItem";
+import { data } from "react-router";
+import useFetch from "../../hooks/useFetch.js";
 
 function ProductContainer() {
+  const { data: products, loading, error } = useFetch("products");
+  if (loading) return <div>در حال دریافت اطلاعات</div>;
+  if (error) return <div>مشکلی پیش امد</div>;
+
   return (
     <>
       <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">

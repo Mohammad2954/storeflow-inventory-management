@@ -7,7 +7,7 @@ function FilterEnventoryItem() {
   return (
     <div className="flex items-center p-4">
       <div className="flex items-center relative w-xl">
-        <CiSearch className=" absolute right-0 z-10 size-5" />
+        <CiSearch className=" absolute right-0 size-5" />
         <input
           className=" border border-gray-300 outline-none py-2 px-4 rounded-xl text-sm pr-6 w-full"
           type="text"

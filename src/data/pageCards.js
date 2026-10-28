@@ -97,7 +97,7 @@ export const pageCards = {
     },
   ],
 
-  inventory: [
+  storeroom: [
     {
       id: 1,
       title: "کل موجودی انبار",
@@ -269,7 +269,7 @@ export const pageCards = {
     },
   ],
 
-  customers: [
+  users: [
     {
       id: 1,
       title: "کل مشتریان",
