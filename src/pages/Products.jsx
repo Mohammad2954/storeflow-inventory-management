@@ -18,18 +18,22 @@ function Products() {
             btn={"افزودن محصول"}
             func={() => {
               setShow(!show);
-              console.log(show);
             }}
           />
         </div>
-        <ProductContainer />
+        <ProductContainer
+          func={() => {
+            setShow(!show);
+          }}
+        />
       </div>
       <div>
         {show ? (
           <AddProduct
+            message={"ذخیره محصول"}
+            method={"POST"}
             func={() => {
               setShow(!show);
-              console.log(show);
             }}
           />
         ) : null}

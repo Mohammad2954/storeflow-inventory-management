@@ -5,11 +5,26 @@ import InfoCounter from "../../feature/components/InfoCounter";
 import FilterEnventoryItem from "../Storeroom/FilterEnventoryItem";
 import { data } from "react-router";
 import useFetch from "../../hooks/useFetch.js";
+import AddProduct from "./AddProduct.jsx";
+import { getData } from "../../feature/Getdata/getData.js";
 
 function ProductContainer() {
+  const [show, setShow] = useState(false);
+  const [element, setElemnt] = useState([]);
+  useEffect(() => {
+    if (element.length !== 0) {
+      setShow(true);
+    }
+  }, [element]);
+
   const { data: products, loading, error } = useFetch("products");
   if (loading) return <div>در حال دریافت اطلاعات</div>;
   if (error) return <div>مشکلی پیش امد</div>;
+
+  const GetDataElemnt = async (id) => {
+    const x = await getData(`products/${id}`);
+    setElemnt(x);
+  };
 
   return (
     <>
@@ -32,7 +47,11 @@ function ProductContainer() {
             </thead>
             <tbody>
               {products.map((item) => (
-                <ProductItem key={item.id} {...item} />
+                <ProductItem
+                  GetDataElemnt={GetDataElemnt}
+                  key={item.id}
+                  {...item}
+                />
               ))}
             </tbody>
           </table>
@@ -42,6 +61,17 @@ function ProductContainer() {
           <Counter />
         </div>
       </div>
+
+      {show ? (
+        <AddProduct
+          message={"ویرایش محصول"}
+          method={"PATCH"}
+          {...element}
+          func={() => {
+            setShow(!show);
+          }}
+        />
+      ) : null}
     </>
   );
 }

@@ -3,6 +3,8 @@ import { MdOutlineEditNote, MdOutlineModeEditOutline } from "react-icons/md";
 import { TbTrash } from "react-icons/tb";
 import { getData } from "../../feature/Getdata/getData";
 import toast from "react-hot-toast";
+import AddProduct from "./AddProduct";
+import { useState } from "react";
 
 function ProductItem({
   id,
@@ -16,6 +18,7 @@ function ProductItem({
   status,
   isActive,
   unit,
+  GetDataElemnt,
 }) {
   const DeletItem = async () => {
     try {
@@ -25,6 +28,7 @@ function ProductItem({
       toast.error(error.message || "حذف با شکست مواجه شد");
     }
   };
+
   return (
     <tr className="text-center mt-2 border-t border-gray-200">
       <td className="py-2">
@@ -42,20 +46,18 @@ function ProductItem({
       <td>
         <span
           className={clsx(
-            status === "موجود"
+            stock > 10
               ? "bg-success-bg text-success"
-              : status === "رو به اتمام"
+              : stock >= 1
                 ? "bg-warning-bg text-warning"
-                : status === "ناموجود"
-                  ? "bg-danger-bg text-danger"
-                  : "",
+                : "bg-danger-bg text-danger",
             "rounded-full py-2 px-4 text-sm",
           )}
         >
-          {status}
+          {stock > 10 ? "موجود" : stock >= 1 ? "رو به اتمام" : "ناموجود"}
         </span>
       </td>
-      <td>{date}</td>
+      <td>{date.split("T")[0]}</td>
       <td>
         <div className="flex items-center justify-center gap-3">
           <TbTrash
@@ -64,7 +66,12 @@ function ProductItem({
               DeletItem();
             }}
           />
-          <MdOutlineModeEditOutline className="text-gray-400 size-5" />
+          <MdOutlineModeEditOutline
+            className="text-gray-400 size-5 hover:text-blue-800 cursor-pointer"
+            onClick={() => {
+              GetDataElemnt(id);
+            }}
+          />
           {/* <MdOutlineEditNote className="text-blue-600 size-6" /> */}
         </div>
       </td>

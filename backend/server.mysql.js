@@ -1,5 +1,4 @@
 const multer = require("multer");
-
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
@@ -288,6 +287,7 @@ app.get(
 
 app.post(
   '/api/products',
+  upload.single("image"),
   asyncRoute(async (req, res) => {
     const body = req.body || {};
 
@@ -365,7 +365,9 @@ app.post(
 
 app.patch(
   '/api/products/:id',
+   upload.single("image"),
   asyncRoute(async (req, res) => {
+
     const id = Number(req.params.id);
 
     const old = await prisma.product.findUnique({
@@ -403,7 +405,6 @@ app.patch(
       'status',
       'isActive',
     ]);
-
     if (data.name !== undefined && !String(data.name).trim()) {
       return bad(res, 'نام محصول الزامی است.');
     }

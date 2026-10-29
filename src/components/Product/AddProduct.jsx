@@ -5,9 +5,29 @@ import ProductImageInput from "../Product/ProductImageInput";
 import { CiSaveDown2 } from "react-icons/ci";
 import useMutation from "../../hooks/useMutation";
 import toast from "react-hot-toast";
-function AddProduct({ func }) {
-  const { data, loading, error, mutate } = useMutation("products");
-  const formData = new FormData();
+function AddProduct({
+  message,
+  method,
+  func,
+  averageCost,
+  category,
+  costPrice,
+  date,
+  id,
+  image,
+  isActive,
+  minStock,
+  name: Name,
+  price,
+  sku,
+  status,
+  stock,
+  unit,
+}) {
+  const { data, loading, error, mutate } = useMutation(
+    `products${method === "PATCH" ? "/" + id : ""}`,
+  );
+  console.log(`products${method === "PATCH" ? "/" + id : ""}`);
 
   const funceducer = (state, action) => {
     switch (action.type) {
@@ -34,32 +54,42 @@ function AddProduct({ func }) {
   };
 
   const [state, dispatch] = useReducer(funceducer, {
-    name: "",
-    sku: "",
-    file: null,
-    category: "",
-    price: "",
-    currentinventory: "",
-    minimumbalance: "",
-    unit: "",
+    name: Name,
+    sku: sku,
+    file: image,
+    category: category,
+    price: price,
+    currentinventory: stock,
+    minimumbalance: minStock,
+    unit: unit,
   });
 
   const addToForm = () => {
+    const formData = new FormData();
+
     formData.append("name", state.name);
     formData.append("sku", state.sku);
     formData.append("category", state.category);
     formData.append("price", Number(state.price));
-    formData.append("stock", Number(state.currentinventory));
-    formData.append("minstock", Number(state.minimumbalance));
+    formData.append("minStock", Number(state.minimumbalance));
     formData.append("unit", state.unit);
+    if (!method) {
+      formData.append("stock", Number(state.currentinventory ?? 0));
+    }
     if (state.file) {
       formData.append("image", state.file);
     }
+    return formData;
   };
   const sendForm = async () => {
     try {
-      const result = await mutate("POST", formData);
-      toast.success("محصول با موفقیت اضافه شد !");
+      let formData = addToForm();
+      const result = await mutate(method || "POST", formData);
+      toast.success(
+        method === "PATCH"
+          ? "محصول با موفقیت ویرایش شد!"
+          : "محصول با موفقیت اضافه شد!",
+      );
       func();
     } catch (error) {
       toast.error(error.message || "خطای ناشناخته");
@@ -76,7 +106,9 @@ function AddProduct({ func }) {
           </div>
           <IoClose
             className="text-red-800 cursor-pointer size-5"
-            onClick={() => func()}
+            onClick={() => {
+              func();
+            }}
           />
         </div>
         <div className="grid grid-cols-2">
@@ -198,13 +230,10 @@ function AddProduct({ func }) {
 
         <div className="grid grid-cols-2 gap-4 px-4">
           <button
-            onClick={() => {
-              addToForm();
-              sendForm();
-            }}
+            onClick={sendForm}
             className="w-full py-3 border border-gray-300 shadow-sm rounded-lg cursor-pointer hover:bg-accent-hover font-bold hover:text-white transition duration-300 flex items-center justify-center gap-2"
           >
-            ذخیره محصول
+            {message}
             <CiSaveDown2 className=" hover:text-white font-bold mt-1 size-5" />
           </button>
           <button
