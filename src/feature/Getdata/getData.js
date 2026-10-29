@@ -2,14 +2,16 @@
 const API_URL = "http://localhost:3002/api";
 
 export const getData = async (path, type = "GET", content) => {
-  try {
-    const isFormData = content instanceof FormData;
+  const isFormData =
+    typeof FormData !== "undefined" && content instanceof FormData;
 
+  try {
     const response = await fetch(`${API_URL}/${path}`, {
       method: type,
-      headers: content && !isFormData
-        ? { "Content-Type": "application/json" }
-        : undefined,
+      headers:
+        content && !isFormData
+          ? { "Content-Type": "application/json" }
+          : undefined,
       body: content
         ? isFormData
           ? content
@@ -17,12 +19,17 @@ export const getData = async (path, type = "GET", content) => {
         : undefined,
     });
 
-    const result = await response.json();
+    const result = await response.json().catch(() => null);
 
     if (!response.ok) {
-      throw new Error(
-        result.message || `Request failed: ${response.status}`
-      );
+      const message =
+        typeof result === "string"
+          ? result
+          : result?.message ||
+            result?.error ||
+            `خطا در درخواست: ${response.status}`;
+
+      throw new Error(message);
     }
 
     return result;

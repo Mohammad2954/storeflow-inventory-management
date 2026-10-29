@@ -4,6 +4,7 @@ import { IoClose } from "react-icons/io5";
 import ProductImageInput from "../Product/ProductImageInput";
 import { CiSaveDown2 } from "react-icons/ci";
 import useMutation from "../../hooks/useMutation";
+import toast from "react-hot-toast";
 function AddProduct({ func }) {
   const { data, loading, error, mutate } = useMutation("products");
   const formData = new FormData();
@@ -58,11 +59,11 @@ function AddProduct({ func }) {
   const sendForm = async () => {
     try {
       const result = await mutate("POST", formData);
-      console.log("res" + result);
+      toast.success("محصول با موفقیت اضافه شد !");
+      func();
     } catch (error) {
-      console.log("err" + error);
+      toast.error(error.message || "خطای ناشناخته");
     }
-    func();
   };
 
   return (
