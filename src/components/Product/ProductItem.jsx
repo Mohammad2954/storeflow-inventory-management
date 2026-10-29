@@ -1,6 +1,8 @@
 import clsx from "clsx";
 import { MdOutlineEditNote, MdOutlineModeEditOutline } from "react-icons/md";
 import { TbTrash } from "react-icons/tb";
+import { getData } from "../../feature/Getdata/getData";
+import toast from "react-hot-toast";
 
 function ProductItem({
   id,
@@ -15,6 +17,14 @@ function ProductItem({
   isActive,
   unit,
 }) {
+  const DeletItem = async () => {
+    try {
+      await getData(`products/${id}`, "DELETE");
+      toast.success("محصول با موفقیت حذف شد");
+    } catch (error) {
+      toast.error(error.message || "حذف با شکست مواجه شد");
+    }
+  };
   return (
     <tr className="text-center mt-2 border-t border-gray-200">
       <td className="py-2">
@@ -48,7 +58,12 @@ function ProductItem({
       <td>{date}</td>
       <td>
         <div className="flex items-center justify-center gap-3">
-          <TbTrash className="text-gray-400 size-5" />
+          <TbTrash
+            className="text-gray-400 size-5 hover:text-red-600 cursor-pointer"
+            onClick={() => {
+              DeletItem();
+            }}
+          />
           <MdOutlineModeEditOutline className="text-gray-400 size-5" />
           {/* <MdOutlineEditNote className="text-blue-600 size-6" /> */}
         </div>

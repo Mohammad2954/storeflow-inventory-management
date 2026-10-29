@@ -287,8 +287,7 @@ app.get(
 );
 
 app.post(
-  "/api/products",
-  upload.single("image"),
+  '/api/products',
   asyncRoute(async (req, res) => {
     const body = req.body || {};
 
@@ -450,32 +449,49 @@ app.patch(
 );
 
 app.delete(
-  "/api/products/:id",
+  '/api/products/:id',
   asyncRoute(async (req, res) => {
     const id = Number(req.params.id);
 
-    if (!Number.isInteger(id) || id <= 0) {
-      return bad(res, "شناسه محصول معتبر نیست.");
+    const product = await prisma.product.findUnique({
+      where: { id },
+    });
+
+    if (!product) return missing(res);
+
+    const [sales, purchases] = await Promise.all([
+      prisma.salesInvoice.findMany(),
+      prisma.purchase.findMany(),
+    ]);
+
+    const used =
+      sales.some((sale) =>
+        (sale.items || []).some((item) =>
+          sameId(getItemProductId(item), id)
+        )
+      ) ||
+      purchases.some((purchase) =>
+        (purchase.items || []).some((item) =>
+          sameId(getItemProductId(item), id)
+        )
+      );
+
+    if (used) {
+      return bad(
+        res,
+        'این محصول در فاکتور ثبت شده و قابل حذف نیست؛ آن را غیرفعال کن.'
+      );
     }
 
-    try {
-      const product = await prisma.product.delete({
-        where: { id },
-      });
+    const updated = await prisma.product.update({
+      where: { id },
+      data: { isActive: false, status: 'غیرفعال' },
+    });
 
-      res.status(200).json({
-        message: "محصول با موفقیت حذف شد.",
-        data: product,
-      });
-    } catch (error) {
-      if (error.code === "P2025") {
-        return res.status(404).json({
-          message: "محصول پیدا نشد.",
-        });
-      }
-
-      throw error;
-    }
+    res.json({
+      message: 'محصول غیرفعال شد.',
+      data: updated,
+    });
   })
 );
 
