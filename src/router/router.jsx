@@ -18,7 +18,7 @@ const roter = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Dashbord /> },
-      { path: "product", element: <Products /> },
+      { path: "products", element: <Products /> },
       // { path: "category", element: <Category /> },
       { path: "storeroom", element: <StoreRoom /> },
       { path: "sales", element: <Sales /> },

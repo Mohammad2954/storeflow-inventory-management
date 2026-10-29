@@ -46,13 +46,15 @@ function ProductContainer() {
               </tr>
             </thead>
             <tbody>
-              {products.map((item) => (
-                <ProductItem
-                  GetDataElemnt={GetDataElemnt}
-                  key={item.id}
-                  {...item}
-                />
-              ))}
+              {products
+                .filter((item) => item.isActive == 1)
+                .map((item) => (
+                  <ProductItem
+                    GetDataElemnt={GetDataElemnt}
+                    key={item.id}
+                    {...item}
+                  />
+                ))}
             </tbody>
           </table>
         </div>
