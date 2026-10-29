@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { getData } from "../feature/Getdata/getData";
 
-const useFetch = (path) => {
+const useFetch = (path,type,content) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,7 +15,7 @@ const useFetch = (path) => {
         setLoading(true);
         setError(null);
 
-        const result = await getData(path);
+        const result = await getData(path,type,content);
 
         if (!ignore) {
           setData(result);

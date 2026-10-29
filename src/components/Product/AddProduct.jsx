@@ -3,7 +3,9 @@ import { AiFillProduct } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
 import ProductImageInput from "../Product/ProductImageInput";
 import { CiSaveDown2 } from "react-icons/ci";
+import useMutation from "../../hooks/useMutation";
 function AddProduct({ func }) {
+  const { data, loading, error, mutate } = useMutation("products");
   const formData = new FormData();
 
   const funceducer = (state, action) => {
@@ -44,14 +46,23 @@ function AddProduct({ func }) {
   const addToForm = () => {
     formData.append("name", state.name);
     formData.append("sku", state.sku);
-    formData.append("category", state.file);
-    formData.append("price", state.category);
-    formData.append("stock", state.price);
-    formData.append("minstock", state.currentinventory);
-    formData.append("unit", state.minimumbalance);
+    formData.append("category", state.category);
+    formData.append("price", Number(state.price));
+    formData.append("stock", Number(state.currentinventory));
+    formData.append("minstock", Number(state.minimumbalance));
+    formData.append("unit", state.unit);
     if (state.file) {
-      formData.append("image", state.unit);
+      formData.append("image", state.file);
     }
+  };
+  const sendForm = async () => {
+    try {
+      const result = await mutate("POST", formData);
+      console.log("res" + result);
+    } catch (error) {
+      console.log("err" + error);
+    }
+    func();
   };
 
   return (
@@ -187,7 +198,8 @@ function AddProduct({ func }) {
         <div className="grid grid-cols-2 gap-4 px-4">
           <button
             onClick={() => {
-              console.log(state);
+              addToForm();
+              sendForm();
             }}
             className="w-full py-3 border border-gray-300 shadow-sm rounded-lg cursor-pointer hover:bg-accent-hover font-bold hover:text-white transition duration-300 flex items-center justify-center gap-2"
           >

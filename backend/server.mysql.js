@@ -1,4 +1,11 @@
+const multer = require("multer");
 
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 2 * 1024 * 1024,
+  },
+});
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -280,7 +287,8 @@ app.get(
 );
 
 app.post(
-  '/api/products',
+  "/api/products",
+  upload.single("image"),
   asyncRoute(async (req, res) => {
     const body = req.body || {};
 
