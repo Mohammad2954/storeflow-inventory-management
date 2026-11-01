@@ -74,6 +74,8 @@ function FilterEnventoryItem({
                 return (
                   <li
                     onClick={() => {
+                      console.log(element);
+
                       dispatch({ type: "change category", value: element });
                       setcategoryShow(!categoryShow);
                     }}

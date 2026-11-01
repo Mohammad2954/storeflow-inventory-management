@@ -34,8 +34,9 @@ function ProductContainer() {
       case "clear":
         return {
           ...state,
-          filterStatus: " همه وضعیت ها",
+          filterStatus: "همه وضعیت ها",
           filterCategory: "همه دسته بندی ها",
+          searchInput: "",
         };
       default:
         return { ...state };
@@ -71,30 +72,34 @@ function ProductContainer() {
     category = Object.keys(category);
   };
   sendData();
-  let filterProdct = state.searchInput
-    ? products.filter((item) => {
-        return (
-          item.name.includes(state.searchInput) ||
-          item.sku.includes(state.searchInput.toUpperCase())
-        );
-      })
-    : products;
-  filterProdct = filterProdct
-    .filter((item) => {
-      if (state.filterStatus === "همه وضعیت ها") {
-        return products;
-      } else {
-        return item.status === state.filterStatus;
-      }
-    })
-    .filter((item) => {
-      if (state.filterCategory === "همه دسته بندی ها") {
-        return products;
-      } else {
-        return item.category === state.filterCategory;
-      }
-    });
 
+  const filterSearchFunc = (pro) => {
+    return state.searchInput
+      ? pro.filter((item) => {
+          return (
+            item.name.includes(state.searchInput) ||
+            item.sku.includes(state.searchInput.toUpperCase())
+          );
+        })
+      : pro;
+  };
+  const filterStatusFunc = (pro) => {
+    return state.filterStatus === "همه وضعیت ها"
+      ? pro
+      : pro.filter((item) => {
+          return item.status === state.filterStatus;
+        });
+  };
+  const filterCategoryFunc = (pro) => {
+    return state.filterCategory === "همه دسته بندی ها"
+      ? pro
+      : pro.filter((item) => {
+          return item.category === state.filterCategory;
+        });
+  };
+  let filterProdct = filterSearchFunc(products);
+  filterProdct = filterStatusFunc(filterProdct);
+  filterProdct = filterCategoryFunc(filterProdct);
   return (
     <>
       <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">
