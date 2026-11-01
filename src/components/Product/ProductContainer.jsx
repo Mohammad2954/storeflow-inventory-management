@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import ProductItem from "./ProductItem";
 import Counter from "../../feature/components/Counter";
 import InfoCounter from "../../feature/components/InfoCounter";
@@ -9,17 +9,43 @@ import AddProduct from "./AddProduct.jsx";
 import { getData } from "../../feature/Getdata/getData.js";
 
 function ProductContainer() {
+  const { data: products, loading, error } = useFetch("products");
+
   const [show, setShow] = useState(false);
   const [element, setElemnt] = useState([]);
+
   let status;
   let category;
+
   useEffect(() => {
     if (element.length !== 0) {
       setShow(true);
     }
   }, [element]);
 
-  const { data: products, loading, error } = useFetch("products");
+  const reduser = (state, action) => {
+    switch (action.type) {
+      case "change category":
+        return { ...state, filterCategory: action.value };
+      case "change status":
+        return { ...state, filterStatus: action.value };
+      case "change search":
+        return { ...state, searchInput: action.value };
+      case "clear":
+        return {
+          ...state,
+          filterStatus: " همه وضعیت ها",
+          filterCategory: "همه دسته بندی ها",
+        };
+      default:
+        return { ...state };
+    }
+  };
+  const [state, dispatch] = useReducer(reduser, {
+    filterStatus: "همه وضعیت ها",
+    filterCategory: "همه دسته بندی ها",
+    searchInput: "",
+  });
   if (loading) return <div>در حال دریافت اطلاعات</div>;
   if (error) return <div>مشکلی پیش امد</div>;
 
@@ -45,10 +71,39 @@ function ProductContainer() {
     category = Object.keys(category);
   };
   sendData();
+  let filterProdct = state.searchInput
+    ? products.filter((item) => {
+        return (
+          item.name.includes(state.searchInput) ||
+          item.sku.includes(state.searchInput.toUpperCase())
+        );
+      })
+    : products;
+  filterProdct = filterProdct
+    .filter((item) => {
+      if (state.filterStatus === "همه وضعیت ها") {
+        return products;
+      } else {
+        return item.status === state.filterStatus;
+      }
+    })
+    .filter((item) => {
+      if (state.filterCategory === "همه دسته بندی ها") {
+        return products;
+      } else {
+        return item.category === state.filterCategory;
+      }
+    });
+
   return (
     <>
       <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">
-        <FilterEnventoryItem status={status} category={category} />
+        <FilterEnventoryItem
+          status={status}
+          category={category}
+          state={state}
+          dispatch={dispatch}
+        />
         <div className="px-4 rounded-t-2xl overflow-hidden border-gray-200 pb-4">
           <table className="w-full shadow-sm  rounded-t-2xl overflow-hidden">
             <thead>
@@ -65,7 +120,7 @@ function ProductContainer() {
               </tr>
             </thead>
             <tbody>
-              {products
+              {filterProdct
                 .filter((item) => item.isActive == 1)
                 .map((item) => (
                   <ProductItem

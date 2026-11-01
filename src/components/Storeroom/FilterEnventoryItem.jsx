@@ -3,35 +3,26 @@ import { CiSearch } from "react-icons/ci";
 import { FaAngleDown } from "react-icons/fa";
 import { TbFilterMinus } from "react-icons/tb";
 
-function FilterEnventoryItem({ status, category }) {
+function FilterEnventoryItem({
+  status,
+  category,
+  searchInput,
+  setSearchInput,
+  state,
+  dispatch,
+}) {
   const [statusShow, setstatusShow] = useState(false);
   const [categoryShow, setcategoryShow] = useState(false);
-  const reduser = (state, action) => {
-    switch (action.type) {
-      case "change category":
-        return { ...state, filterCategory: action.value };
-      case "change status":
-        return { ...state, filterStatus: action.value };
-      case "clear":
-        return {
-          ...state,
-          filterStatus: " همه وضعیت ها",
-          filterCategory: "همه دسته بندی ها",
-        };
 
-      default:
-        return { ...state };
-    }
-  };
-  const [state, dispatch] = useReducer(reduser, {
-    filterStatus: " همه وضعیت ها",
-    filterCategory: "همه دسته بندی ها",
-  });
   return (
     <div className="flex items-center p-4">
       <div className="flex items-center relative w-xl">
         <CiSearch className=" absolute right-0 size-5" />
         <input
+          value={state.searchInput}
+          onChange={(event) => {
+            dispatch({ type: "change search", value: event.target.value });
+          }}
           className=" border border-gray-300 outline-none py-2 px-4 rounded-xl text-sm pr-6 w-full"
           type="text"
           placeholder="جستجو نام یا کد ..."
