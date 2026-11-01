@@ -11,6 +11,8 @@ import { getData } from "../../feature/Getdata/getData.js";
 function ProductContainer() {
   const [show, setShow] = useState(false);
   const [element, setElemnt] = useState([]);
+  let status;
+  let category;
   useEffect(() => {
     if (element.length !== 0) {
       setShow(true);
@@ -26,10 +28,27 @@ function ProductContainer() {
     setElemnt(x);
   };
 
+  const sendData = () => {
+    let findStatus = products
+      .map((item) => item.status)
+      .reduce((acc, name) => {
+        acc[name] = (acc[name] || 0) + 1;
+        return acc;
+      }, {});
+    status = Object.keys(findStatus);
+    category = products
+      .map((item) => item.category)
+      .reduce((acc, name) => {
+        acc[name] = (acc[name] || 0) + 1;
+        return acc;
+      }, {});
+    category = Object.keys(category);
+  };
+  sendData();
   return (
     <>
       <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">
-        <FilterEnventoryItem />
+        <FilterEnventoryItem status={status} category={category} />
         <div className="px-4 rounded-t-2xl overflow-hidden border-gray-200 pb-4">
           <table className="w-full shadow-sm  rounded-t-2xl overflow-hidden">
             <thead>
