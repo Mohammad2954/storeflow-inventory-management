@@ -73,7 +73,7 @@ function AddProduct({
     formData.append("price", Number(state.price));
     formData.append("minStock", Number(state.minimumbalance));
     formData.append("unit", state.unit);
-    if (!method) {
+    if (method) {
       formData.append("stock", Number(state.currentinventory ?? 0));
     }
     if (state.file) {

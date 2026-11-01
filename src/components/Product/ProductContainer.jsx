@@ -62,7 +62,7 @@ function ProductContainer() {
         acc[name] = (acc[name] || 0) + 1;
         return acc;
       }, {});
-    status = Object.keys(findStatus);
+    status = Object.keys(findStatus).splice(0, 3);
     category = products
       .map((item) => item.category)
       .reduce((acc, name) => {
