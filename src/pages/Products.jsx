@@ -15,7 +15,6 @@ import { findDataCards } from "../feature/GetDataCard/findDataCards";
 
 function Products() {
   const [show, setShow] = useState(false);
-  const [card, setCard] = useState({});
 
   const { data } = useFetch("products");
   const [dataCard, setDataCard] = useState([]);
