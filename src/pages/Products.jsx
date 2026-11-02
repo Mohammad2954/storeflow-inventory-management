@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TopPage from "../feature/components/TopPage";
 import ProductContainer from "../components/Product/ProductContainer";
 import { AiFillProduct } from "react-icons/ai";
@@ -11,72 +11,79 @@ import {
   FaExclamationTriangle,
   FaShoppingCart,
 } from "react-icons/fa";
+import { findDataCards } from "../feature/GetDataCard/findDataCards";
 
 function Products() {
   const [show, setShow] = useState(false);
   const [card, setCard] = useState({});
 
   const { data } = useFetch("products");
-  const findDataCard = () => {
-    let AllCard = [];
-    const firstData = data.length;
-    let secondData = 0;
-    data.map((item) => {
-      if (item.isActive == 1) {
-        secondData += 1;
+  const [dataCard, setDataCard] = useState([]);
+  useEffect(() => {
+    if (data.length > 0) {
+      let Card = findDataCards(
+        data,
+        "without helperdata",
+        firstCard,
+        "کل محصولات",
+        FaBoxOpen,
+        "text-blue-600",
+        "bg-blue-50",
+        secondCard,
+        "محصولات فعال",
+        FaShoppingCart,
+        "text-green-600",
+        "bg-green-50",
+        thirdCard,
+        "محصولات ناموجود",
+        FaExclamationTriangle,
+        "text-red-600",
+        "bg-red-50",
+        forthCard,
+        "دسته‌بندی‌ها",
+        FaClipboardList,
+        "text-purple-600",
+        "bg-purple-50",
+      );
+      setDataCard(Card);
+    }
+  }, [data]);
+  const firstCard = (items) => {
+    return items.length;
+  };
+  const secondCard = (items) => {
+    let findActiveProduct = items.reduce((prev, next) => {
+      if (next.isActive == 1) {
+        return prev + 1;
+      } else {
+        return prev;
       }
-    });
-    const thirdData = data.length - secondData;
-    let forthData = data
+    }, 0);
+    return findActiveProduct;
+  };
+  const thirdCard = (items) => {
+    let findActiveProduct = items.reduce((prev, next) => {
+      if (next.isActive == 1) {
+        return prev + 1;
+      } else {
+        return prev;
+      }
+    }, 0);
+    return items.length - findActiveProduct;
+  };
+  const forthCard = (items) => {
+    let categoryname = items
       .map((item) => item.category)
       .reduce((acc, name) => {
         acc[name] = (acc[name] || 0) + 1;
         return acc;
       }, {});
-
-    forthData = Object.values(forthData).length;
-    AllCard = [
-      {
-        id: 1,
-        title: "کل محصولات",
-        value: firstData,
-        icon: FaBoxOpen,
-        color: "text-blue-600",
-        bg: "bg-blue-50",
-      },
-      {
-        id: 2,
-        title: "محصولات فعال",
-        value: secondData,
-        icon: FaShoppingCart,
-        color: "text-green-600",
-        bg: "bg-green-50",
-      },
-      {
-        id: 3,
-        title: "کل محصولات ناموجود",
-        value: thirdData,
-        icon: FaExclamationTriangle,
-        color: "text-red-600",
-        bg: "bg-red-50",
-      },
-      {
-        id: 4,
-        title: "دسته‌بندی‌ها",
-        value: forthData,
-        icon: FaClipboardList,
-        color: "text-purple-600",
-        bg: "bg-purple-50",
-      },
-    ];
-
-    return AllCard;
+    return Object.values(categoryname).length;
   };
-  findDataCard();
 
   return (
     <>
-      <CardSection card={findDataCard()} />
+      <CardSection card={dataCard} />
       <div className="">
         <div className="flex items-center px-8 gap-2">
           <AiFillProduct className="size-8" />
