@@ -5,7 +5,13 @@ import { paymentMethods } from "../data/paymentMethods.js";
 import Counter from "../feature/components/Counter.jsx";
 import InfoCounter from "../feature/components/InfoCounter.jsx";
 import { salesInvoices } from "../data/salesInvoices.js";
-import { FaArrowLeft } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaBoxOpen,
+  FaClipboardList,
+  FaMoneyBillWave,
+  FaUsers,
+} from "react-icons/fa";
 import { IoDocumentsOutline } from "react-icons/io5";
 import SalesLastItem from "../components/dashbord/SalesLastItem.jsx";
 import LatestActivities from "../components/dashbord/LatestActivities.jsx";
@@ -14,11 +20,89 @@ import Card from "../components/dashbord/Card.jsx";
 import CardSection from "../feature/Cards/CardSection.jsx";
 import { data } from "react-router";
 import { getData } from "../feature/Getdata/getData.js";
+import useFetch from "../hooks/useFetch.js";
+import { useEffect, useState } from "react";
+import { findDataCards } from "../feature/GetDataCard/findDataCards.js";
+import { getTodayDate } from "../feature/GetToday/getToday.js";
 
 function Dashbord() {
+  const { data: products } = useFetch("products");
+
+  const { data: customers } = useFetch("customers");
+  const { data } = useFetch("sales");
+  const [dataCard, setDataCard] = useState([]);
+
+  useEffect(() => {
+    if (data.length > 0) {
+      let Card = findDataCards(
+        data,
+        customers,
+        firstCard,
+        "مجموع فروش امروز",
+        FaMoneyBillWave,
+        "text-green-600",
+        "bg-green-50",
+        secondCard,
+        "تعداد فاکتور امروز",
+        FaClipboardList,
+        "text-blue-600",
+        "bg-blue-50",
+        thirdCard,
+        "موجودی کل کالاها",
+        FaBoxOpen,
+        "text-purple-600",
+        "bg-purple-50",
+        forthCard,
+        "تعداد مشتریان امروز",
+        FaUsers,
+        "text-teal-600",
+        "bg-teal-50",
+      );
+      setDataCard(Card);
+    }
+  }, [data]);
+  const firstCard = (items) => {
+    let findtodayTotalAmount = items.reduce((prev, next) => {
+      // date test
+      if (next.date == "1405/07/23") {
+        return prev + next.totalAmount;
+      } else {
+        return prev;
+      }
+    }, 0);
+
+    return findtodayTotalAmount.toLocaleString();
+  };
+  const secondCard = (items) => {
+    let today = getTodayDate();
+    let findtodaySalesCount = items.reduce((prev, next) => {
+      // date test
+      if (next.date == "1405/07/23") {
+        return prev + 1;
+      } else {
+        return prev;
+      }
+    }, 0);
+    return findtodaySalesCount;
+  };
+  const thirdCard = () => {
+    return products.length;
+  };
+  const forthCard = (items) => {
+    let today = getTodayDate();
+    let findtodaycoustomerCount = items.reduce((prev, next) => {
+      // date test
+      if (next.registerDate == "1405/01/12") {
+        return prev + 1;
+      } else {
+        return prev;
+      }
+    }, 0);
+    return findtodaycoustomerCount;
+  };
   return (
     <>
-      <CardSection />
+      <CardSection card={dataCard} />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-5">
           <CategorySalesChart data={paymentMethods} info={"روش های پرداخت"} />

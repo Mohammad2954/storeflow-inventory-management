@@ -47,13 +47,6 @@ function Sales() {
     }
   }, [data]);
   const firstCard = (items) => {
-    let totalPrice = items.reduce((prev, next) => {
-      return prev + next?.totalAmount;
-    }, 0);
-    return totalPrice.toLocaleString();
-  };
-  const secondCard = (items) => {
-    let today = getTodayDate();
     let findtodayTotalAmount = items.reduce((prev, next) => {
       // date test
       if (next.date == "1405/07/23") {
@@ -62,7 +55,20 @@ function Sales() {
         return prev;
       }
     }, 0);
+
     return findtodayTotalAmount.toLocaleString();
+  };
+  const secondCard = (items) => {
+    let today = getTodayDate();
+    let findtodaySalesCount = items.reduce((prev, next) => {
+      // date test
+      if (next.date == "1405/07/23") {
+        return prev + 1;
+      } else {
+        return prev;
+      }
+    }, 0);
+    return findtodaySalesCount;
   };
   const thirdCard = (items) => {
     let findBeingProcessed = items.reduce((prev, next) => {
