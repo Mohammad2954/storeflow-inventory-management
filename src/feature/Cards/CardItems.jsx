@@ -4,8 +4,14 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 
 function CardItems({ title, value, icon: Icon, color, bg }) {
   return (
-    <div className="p-2 rounded-lg border- border-gray-300 shadow-sm">
-      <div className={clsx("flex justify-between rounded-lg p-2", bg, color)}>
+    <div className="p-2 rounded-lg border- border-gray-300 shadow-sm ">
+      <div
+        className={clsx(
+          "flex justify-between rounded-lg p-2 h-full",
+          bg,
+          color,
+        )}
+      >
         <div className="flex flex-col gap-1">
           <span className="font-bold">{title}</span>
           <span className="text-black font-bold">{value}</span>
