@@ -8,7 +8,7 @@ export const sidebarItems = [
   {
     id: 2,
     title: "محصولات",
-    path: "/products",
+    path: "/products/1",
     icon: 'AiFillProduct' ,
   },
   {

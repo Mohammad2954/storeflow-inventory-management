@@ -12,11 +12,14 @@ import {
   FaShoppingCart,
 } from "react-icons/fa";
 import { findDataCards } from "../feature/GetDataCard/findDataCards";
+import { useParams } from "react-router";
+import { paiginationFunc } from "../feature/Pagination/pagination";
 
 function Products() {
   const [show, setShow] = useState(false);
 
   const { data } = useFetch("products");
+
   const [dataCard, setDataCard] = useState([]);
   useEffect(() => {
     if (data.length > 0) {
@@ -45,6 +48,7 @@ function Products() {
         "bg-purple-50",
       );
       setDataCard(Card);
+      console.log(data);
     }
   }, [data]);
   const firstCard = (items) => {

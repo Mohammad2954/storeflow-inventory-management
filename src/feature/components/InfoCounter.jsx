@@ -7,7 +7,7 @@ function InfoCounter({ first, second, third }) {
         <span>نمایش</span>
         <span>{first}</span>
         <span>تا</span>
-        <span>{second}</span>
+        <span>{second < third ? second : third}</span>
         <span>از</span>
         <span>{third}</span>
         <span>مورد</span>

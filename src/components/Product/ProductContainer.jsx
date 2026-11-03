@@ -3,16 +3,31 @@ import ProductItem from "./ProductItem";
 import Counter from "../../feature/components/Counter";
 import InfoCounter from "../../feature/components/InfoCounter";
 import FilterEnventoryItem from "../Storeroom/FilterEnventoryItem";
-import { data } from "react-router";
+import { data, useNavigate, useParams } from "react-router";
 import useFetch from "../../hooks/useFetch.js";
 import AddProduct from "./AddProduct.jsx";
 import { getData } from "../../feature/Getdata/getData.js";
+import { paiginationFunc } from "../../feature/Pagination/pagination.js";
 
 function ProductContainer() {
+  let param = useParams();
+  param = Number(param.page);
+  let navpage = useNavigate();
+
+  const changePage = (page) => {
+    navpage(`/products/${page}`);
+  };
+
   const { data: products, loading, error } = useFetch("products");
 
   const [show, setShow] = useState(false);
   const [element, setElemnt] = useState([]);
+
+  let { finalData, countPage, firstIndex, lastIndex } = paiginationFunc(
+    products.filter((item) => item.isActive == 1),
+    3,
+    param,
+  );
 
   let status;
   let category;
@@ -97,7 +112,8 @@ function ProductContainer() {
           return item.category === state.filterCategory;
         });
   };
-  let filterProdct = filterSearchFunc(products);
+
+  let filterProdct = filterSearchFunc(finalData);
   filterProdct = filterStatusFunc(filterProdct);
   filterProdct = filterCategoryFunc(filterProdct);
   return (
@@ -125,21 +141,27 @@ function ProductContainer() {
               </tr>
             </thead>
             <tbody>
-              {filterProdct
-                .filter((item) => item.isActive == 1)
-                .map((item) => (
-                  <ProductItem
-                    GetDataElemnt={GetDataElemnt}
-                    key={item.id}
-                    {...item}
-                  />
-                ))}
+              {finalData.map((item) => (
+                <ProductItem
+                  GetDataElemnt={GetDataElemnt}
+                  key={item.id}
+                  {...item}
+                />
+              ))}
             </tbody>
           </table>
         </div>
         <div className="flex justify-between mb-4 px-4">
-          <InfoCounter first={1} second={5} third={25} />
-          <Counter />
+          <InfoCounter
+            first={firstIndex + 1}
+            second={lastIndex}
+            third={products.filter((item) => item.isActive == 1).length}
+          />
+          <Counter
+            countPage={countPage}
+            param={param}
+            changePage={changePage}
+          />
         </div>
       </div>
 
