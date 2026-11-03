@@ -25,7 +25,7 @@ function ProductContainer() {
 
   let { finalData, countPage, firstIndex, lastIndex } = paiginationFunc(
     products.filter((item) => item.isActive == 1),
-    3,
+    1,
     param,
   );
 
