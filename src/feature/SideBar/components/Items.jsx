@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import clsx from "clsx";
 import { MdSpaceDashboard } from "react-icons/md";
 import { AiFillProduct } from "react-icons/ai";
@@ -25,6 +25,9 @@ const icons = {
 
 function Items({ title, path, icon }) {
   const Icon = icons[icon];
+  let x = useLocation();
+  x = x.pathname.split("/")[1];
+
   return (
     <NavLink
       to={path}
@@ -34,6 +37,9 @@ function Items({ title, path, icon }) {
             ? "bg-gradient-to-br from-green-400 via-green-500 to-green-600"
             : "",
           " text-white w-full py-2 flex items-center gap-4 pr-3 rounded-lg mt-1 ",
+          x === path.split("/")[1]
+            ? "bg-gradient-to-br from-green-400 via-green-500 to-green-600"
+            : null,
         );
       }}
     >
