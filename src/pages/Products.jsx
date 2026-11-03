@@ -48,7 +48,6 @@ function Products() {
         "bg-purple-50",
       );
       setDataCard(Card);
-      console.log(data);
     }
   }, [data]);
   const firstCard = (items) => {

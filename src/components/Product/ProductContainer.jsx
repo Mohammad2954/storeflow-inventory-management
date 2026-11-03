@@ -23,12 +23,6 @@ function ProductContainer() {
   const [show, setShow] = useState(false);
   const [element, setElemnt] = useState([]);
 
-  let { finalData, countPage, firstIndex, lastIndex } = paiginationFunc(
-    products.filter((item) => item.isActive == 1),
-    1,
-    param,
-  );
-
   let status;
   let category;
 
@@ -113,9 +107,17 @@ function ProductContainer() {
         });
   };
 
-  let filterProdct = filterSearchFunc(finalData);
+  let filterProdct = filterSearchFunc(products);
   filterProdct = filterStatusFunc(filterProdct);
   filterProdct = filterCategoryFunc(filterProdct);
+
+  let { finalData, countPage, firstIndex, lastIndex } = paiginationFunc(
+    filterProdct.filter((item) => item.isActive == 1),
+    10,
+    param,
+  );
+  console.log(countPage);
+
   return (
     <>
       <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">
@@ -155,7 +157,7 @@ function ProductContainer() {
           <InfoCounter
             first={firstIndex + 1}
             second={lastIndex}
-            third={products.filter((item) => item.isActive == 1).length}
+            third={filterProdct.filter((item) => item.isActive == 1).length}
           />
           <Counter
             countPage={countPage}

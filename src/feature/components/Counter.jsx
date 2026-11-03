@@ -26,7 +26,6 @@ function Counter({ countPage, param, changePage }) {
 
     return [1, "...", param - 1, param, param + 1, "...", countPage.length];
   };
-  console.log(getPagination());
 
   return (
     <div className="">
