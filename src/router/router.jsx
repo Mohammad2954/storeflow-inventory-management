@@ -20,7 +20,7 @@ const roter = createBrowserRouter([
       { index: true, element: <Dashbord /> },
       { path: "products/:page?", element: <Products /> },
       // { path: "category", element: <Category /> },
-      { path: "storeroom", element: <StoreRoom /> },
+      { path: "inventory/:page?", element: <StoreRoom /> },
       { path: "sales", element: <Sales /> },
       { path: "purchases", element: <Purchases /> },
       { path: "suppliers", element: <Suppliers /> },

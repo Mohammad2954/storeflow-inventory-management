@@ -14,7 +14,7 @@ export const sidebarItems = [
   {
     id: 3,
     title: "انبار و موجودی",
-    path: "/storeroom",
+    path: "/inventory/1",
     icon: 'FaWarehouse' ,
   },
   {

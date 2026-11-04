@@ -81,13 +81,13 @@ function StoreRoom() {
   return (
     <>
       <CardSection card={dataCard} />
-      {/* <div className="flex items-center px-8 gap-2">
+      <div className="flex items-center px-8 gap-2">
         <FaWarehouse className="size-8" />
         <TopPage name={"انبار و موجودی"} btn={"افزودن موجودی"} />
       </div>
       <div>
         <StoreRoomContainer />
-      </div> */}
+      </div>
     </>
   );
 }

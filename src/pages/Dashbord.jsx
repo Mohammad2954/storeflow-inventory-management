@@ -149,7 +149,7 @@ function Dashbord() {
           </div>
           <div className="flex justify-between mb-4 px-4">
             <InfoCounter first={1} second={5} third={25} />
-            <Counter />
+            {/* <Counter /> */}
           </div>
         </div>
       </div>

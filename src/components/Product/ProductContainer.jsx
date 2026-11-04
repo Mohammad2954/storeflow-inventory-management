@@ -116,7 +116,6 @@ function ProductContainer() {
     10,
     param,
   );
-  console.log(countPage);
 
   return (
     <>
