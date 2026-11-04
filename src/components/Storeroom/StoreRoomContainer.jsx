@@ -138,6 +138,9 @@ function StoreRoomContainer() {
     10,
     param,
   );
+  console.log(`countPage = ${countPage}`);
+  console.log(`firstIndex = ${firstIndex}`);
+  console.log(`lastIndex = ${lastIndex}`);
 
   return (
     <div>
@@ -182,7 +185,7 @@ function StoreRoomContainer() {
             <InfoCounter
               first={firstIndex + 1}
               second={lastIndex}
-              third={filterProdct.filter((item) => item.isActive == 1).length}
+              third={filterProdct.length}
             />
             <Counter
               countPage={countPage}
