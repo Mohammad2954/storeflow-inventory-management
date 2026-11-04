@@ -5,6 +5,9 @@ import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
 import { MdOutlineEditNote, MdOutlineModeEditOutline } from "react-icons/md";
 import { TbTrash } from "react-icons/tb";
 import VolumeOperations from "./VolumeOperations";
+import useFetch from "../../hooks/useFetch";
+import { getData } from "../../feature/Getdata/getData";
+import toast from "react-hot-toast";
 
 function EnventoryItem({
   id,
@@ -24,9 +27,20 @@ function EnventoryItem({
   const [increasShow, setincreasShow] = useState(false);
   const [decriseShow, setdecriseShow] = useState(false);
   const [val, setVal] = useState("");
-  // const increaseProductInInventory=()=>{
 
-  // }
+  const changeValueProductInInventory = async (type) => {
+    const x = await getData(`inventory/${id}/adjust`, "POST", {
+      quantity: val,
+      direction: `${type}`,
+    });
+    if (x.message === "موجودی اصلاح شد.") {
+      toast.success("موجودی اصلاح شد.");
+      setShow(false);
+      setincreasShow(false);
+      setdecriseShow(false);
+      setVal("");
+    }
+  };
 
   return (
     <tr className="text-center mt-2 border-t border-gray-200">
@@ -77,6 +91,9 @@ function EnventoryItem({
               <div
                 onClick={() => {
                   setincreasShow(!increasShow);
+                  if (decriseShow) {
+                    setdecriseShow(!decriseShow);
+                  }
                 }}
                 className="flex items-center gap-3  hover:text-accent-hover cursor-pointer p-1 justify-between"
               >
@@ -84,11 +101,19 @@ function EnventoryItem({
                 <span className="text-[12px] font-bold">افزایش موجودی</span>
               </div>
               {increasShow ? (
-                <VolumeOperations text={"افزایش"} val={val} setVal={setVal} />
+                <VolumeOperations
+                  changeValueProductInInventory={changeValueProductInInventory}
+                  text={"افزایش"}
+                  val={val}
+                  setVal={setVal}
+                />
               ) : null}
               <div
                 onClick={() => {
                   setdecriseShow(!decriseShow);
+                  if (increasShow) {
+                    setincreasShow(!increasShow);
+                  }
                 }}
                 className="flex items-center gap-3  hover:text-red-400 cursor-pointer p-1 justify-between"
               >
@@ -96,7 +121,12 @@ function EnventoryItem({
                 <span className="text-[12px] font-bold">کاهش موجودی</span>
               </div>
               {decriseShow ? (
-                <VolumeOperations text={"کاهش"} val={val} setVal={setVal} />
+                <VolumeOperations
+                  changeValueProductInInventory={changeValueProductInInventory}
+                  text={"کاهش"}
+                  val={val}
+                  setVal={setVal}
+                />
               ) : null}
             </div>
           ) : null}
