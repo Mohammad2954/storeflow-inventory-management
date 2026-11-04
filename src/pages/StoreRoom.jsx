@@ -83,7 +83,7 @@ function StoreRoom() {
       <CardSection card={dataCard} />
       <div className="flex items-center px-8 gap-2">
         <FaWarehouse className="size-8" />
-        <TopPage name={"انبار و موجودی"} btn={"افزودن موجودی"} />
+        <TopPage name={"انبار و موجودی"} />
       </div>
       <div>
         <StoreRoomContainer />

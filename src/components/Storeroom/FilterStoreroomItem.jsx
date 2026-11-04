@@ -71,7 +71,7 @@ function FilterStoreroomItem({
           </span>
           <FaAngleDown />
           {categoryShow ? (
-            <ul className=" overflow-hidden absolute border border-gray-300 top-10 z-100 bg-white rounded-sm right-0 shadow-sm">
+            <ul className=" overflow-hidden absolute border border-gray-300 top-10 z-1000 bg-white rounded-sm right-0 shadow-sm">
               {category.map((element, index) => {
                 return (
                   <li
@@ -101,7 +101,7 @@ function FilterStoreroomItem({
           </span>
           <FaAngleDown />
           {inventoryShow ? (
-            <ul className=" overflow-hidden absolute border border-gray-300 top-10 z-100 bg-white rounded-sm right-0 shadow-sm">
+            <ul className=" z-1000 overflow-hidden absolute border border-gray-300 top-10  bg-white rounded-sm right-0 shadow-sm">
               {inven.slice(0, -1).map((element, index) => {
                 return (
                   <li

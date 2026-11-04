@@ -23,17 +23,10 @@ function StoreRoomContainer() {
   const { data: inventory, loading, error } = useFetch("inventory");
 
   const [show, setShow] = useState(false);
-  const [element, setElemnt] = useState([]);
 
   let status;
   let category;
   let inven;
-
-  useEffect(() => {
-    if (element.length !== 0) {
-      setShow(true);
-    }
-  }, [element]);
 
   const reduser = (state, action) => {
     switch (action.type) {
@@ -65,11 +58,6 @@ function StoreRoomContainer() {
   });
   if (loading) return <div>در حال دریافت اطلاعات</div>;
   if (error) return <div>مشکلی پیش امد</div>;
-
-  const GetDataElemnt = async (id) => {
-    const x = await getData(`inventory/${id}`);
-    setElemnt(x);
-  };
 
   const sendData = () => {
     let findStatus = inventory
@@ -138,9 +126,6 @@ function StoreRoomContainer() {
     10,
     param,
   );
-  console.log(`countPage = ${countPage}`);
-  console.log(`firstIndex = ${firstIndex}`);
-  console.log(`lastIndex = ${lastIndex}`);
 
   return (
     <div>
@@ -172,18 +157,14 @@ function StoreRoomContainer() {
               </thead>
               <tbody>
                 {finalData.map((item) => (
-                  <EnventoryItem
-                    GetDataElemnt={GetDataElemnt}
-                    key={item.id}
-                    {...item}
-                  />
+                  <EnventoryItem key={item.id} {...item} />
                 ))}
               </tbody>
             </table>
           </div>
           <div className="flex justify-between mb-4 px-2">
             <InfoCounter
-              first={firstIndex + 1}
+              first={filterProdct.length == 0 ? 0 : firstIndex + 1}
               second={lastIndex}
               third={filterProdct.length}
             />
@@ -194,16 +175,6 @@ function StoreRoomContainer() {
             />
           </div>
         </div>
-        {show ? (
-          <AddProduct
-            message={"ویرایش محصول"}
-            method={"PATCH"}
-            {...element}
-            func={() => {
-              setShow(!show);
-            }}
-          />
-        ) : null}
       </>
     </div>
   );
