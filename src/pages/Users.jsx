@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import TopPage from "../feature/components/TopPage";
 import {
   FaMoneyBillWave,
@@ -11,11 +11,45 @@ import CardSection from "../feature/Cards/CardSection";
 import useFetch from "../hooks/useFetch";
 import { findDataCards } from "../feature/GetDataCard/findDataCards";
 import Adduser from "../components/users/Adduser";
+import useMutation from "../hooks/useMutation";
+import toast from "react-hot-toast";
 
 function Users() {
   const { data: customers } = useFetch("customers");
+  const { data, loading, error, mutate } = useMutation("customers");
   const [dataCard, setDataCard] = useState([]);
   const [showModal, setShowModal] = useState(false);
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "name":
+        return { ...state, name: action.value };
+      case "phone":
+        return { ...state, phone: action.value };
+      case "email":
+        return { ...state, email: action.value };
+      case "type":
+        return { ...state, type: action.value };
+      case "city":
+        return { ...state, city: action.value };
+      case "address":
+        return { ...state, address: action.value };
+      case "code":
+        return { ...state, code: action.value };
+
+      default:
+        return state;
+    }
+  };
+  const [state, dispatch] = useReducer(reducer, {
+    name: "",
+    phone: "",
+    email: "",
+    type: "",
+    city: "",
+    address: "",
+    code: "",
+  });
 
   useEffect(() => {
     if (customers.length > 0) {
@@ -93,6 +127,37 @@ function Users() {
     return totalSalesLast30Days;
   };
 
+  const addToForm = () => {
+    return {
+      name: state.name.trim(),
+      code: state.code.trim(),
+      phone: state.phone.trim(),
+      email: state.email.trim(),
+      city: state.city.trim(),
+      type: state.type.trim(),
+      address: state.address.trim(),
+    };
+  };
+
+  const sendForm = async () => {
+    if (!state.name.trim() || !state.code.trim() || !state.phone.trim()) {
+      toast.error("نام، کد و شماره تماس الزامی هستند");
+      return;
+    }
+
+    try {
+      const customerData = addToForm();
+
+      await mutate("POST", customerData);
+
+      toast.success("مشتری با موفقیت اضافه شد");
+      setShowModal(!showModal);
+    } catch (error) {
+      console.error("Customer API error:", error);
+      toast.error(error.message || "ثبت مشتری ناموفق بود");
+    }
+  };
+
   return (
     <>
       <CardSection card={dataCard} />
@@ -111,6 +176,9 @@ function Users() {
       </div>
       {showModal ? (
         <Adduser
+          sendForm={sendForm}
+          dispatch={dispatch}
+          state={state}
           func={() => {
             setShowModal(!showModal);
           }}

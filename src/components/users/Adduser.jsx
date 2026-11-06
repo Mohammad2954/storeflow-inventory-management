@@ -2,8 +2,10 @@ import React from "react";
 import { AiFillProduct } from "react-icons/ai";
 import { CiSaveDown2 } from "react-icons/ci";
 import { IoClose } from "react-icons/io5";
+import useMutation from "../../hooks/useMutation";
+import toast from "react-hot-toast";
 
-function Adduser({ func }) {
+function Adduser({ func, dispatch, state, sendForm }) {
   return (
     <div className="bg-black/15 backdrop-blur-sm w-full h-full fixed left-0 right-0 bottom-0 top-0">
       <div className="w-2xl bg-white dark:bg-gray-800 z-1000 py-4 rounded-xl shadow-sm m-8 absolute left-1/5 top-6 backdrop-blur-2xl ">
@@ -26,10 +28,10 @@ function Adduser({ func }) {
                 نام مشتری
               </label>
               <input
-                // value={state.name}
-                // onChange={(event) => {
-                //   dispatch({ type: "name", value: event.target.value });
-                // }}
+                value={state.name}
+                onChange={(event) => {
+                  dispatch({ type: "name", value: event.target.value });
+                }}
                 className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
                 type="text"
                 placeholder="نام مشتری را وارد کنید"
@@ -40,10 +42,10 @@ function Adduser({ func }) {
                 شماره تلفن
               </label>
               <input
-                // value={state.sku}
-                // onChange={(event) => {
-                //   dispatch({ type: "sku", value: event.target.value });
-                // }}
+                value={state.phone}
+                onChange={(event) => {
+                  dispatch({ type: "phone", value: event.target.value });
+                }}
                 className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
                 type="text"
                 placeholder=" شماره تلفن مشتری را وارد کنید"
@@ -56,10 +58,10 @@ function Adduser({ func }) {
               ایمیل
             </label>
             <input
-              //   value={state.category}
-              //   onChange={(event) => {
-              //     dispatch({ type: "category", value: event.target.value });
-              //   }}
+              value={state.email}
+              onChange={(event) => {
+                dispatch({ type: "email", value: event.target.value });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="ایمیل مشتری را وارد کنید"
@@ -67,13 +69,13 @@ function Adduser({ func }) {
           </div>
           <div className="flex flex-col gap-1.5 px-3 mb-4">
             <label className="text-sm font-bold" htmlFor="">
-              نوع مشتری
+              کد مشتری
             </label>
             <input
-              //   value={state.price}
-              //   onChange={(event) => {
-              //     dispatch({ type: "price", value: event.target.value });
-              //   }}
+              value={state.code}
+              onChange={(event) => {
+                dispatch({ type: "code", value: event.target.value });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="نوع مشتری را وارد کنید"
@@ -81,21 +83,19 @@ function Adduser({ func }) {
           </div>
           <div className="flex flex-col gap-1.5 px-3 mb-4">
             <label className="text-sm font-bold" htmlFor="">
-              ادرس
+              نوع مشتری
             </label>
             <input
-              //   value={state.currentinventory}
-              //   onChange={(event) => {
-              //     dispatch({
-              //       type: "currentinventory",
-              //       value: event.target.value,
-              //     });
-              //   }}
+              value={state.type}
+              onChange={(event) => {
+                dispatch({ type: "type", value: event.target.value });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
-              placeholder="ادرس مشتری"
+              placeholder="نوع مشتری را وارد کنید"
             />
           </div>
+
           {/* <div className="flex flex-col gap-1.5 px-3 mb-4">
             <label className="text-sm font-bold" htmlFor="">
               توضیحات
@@ -115,20 +115,39 @@ function Adduser({ func }) {
               شهر
             </label>
             <input
-              //   value={state.unit}
-              //   onChange={(event) => {
-              //     dispatch({ type: "unit", value: event.target.value });
-              //   }}
+              value={state.city}
+              onChange={(event) => {
+                dispatch({ type: "city", value: event.target.value });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="شهر مشتری ..."
+            />
+          </div>
+          <div className="flex flex-col gap-1.5 px-3 mb-4 h-full">
+            <label className="text-sm font-bold" htmlFor="">
+              ادرس
+            </label>
+            <textarea
+              value={state.address}
+              onChange={(event) => {
+                dispatch({
+                  type: "address",
+                  value: event.target.value,
+                });
+              }}
+              className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm h-full mb-4"
+              type="text"
+              placeholder="ادرس مشتری"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4 px-4">
           <button
-            // onClick={sendForm}
+            onClick={() => {
+              sendForm();
+            }}
             className="w-full py-3 border border-gray-300 shadow-sm rounded-lg cursor-pointer hover:bg-accent-hover font-bold hover:text-white transition duration-300 flex items-center justify-center gap-2"
           >
             اضافه کردن مشتری
