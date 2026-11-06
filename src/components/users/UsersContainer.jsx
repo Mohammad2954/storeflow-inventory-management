@@ -5,7 +5,7 @@ import UsersItem from "./UsersItem";
 import InfoCounter from "../../feature/components/InfoCounter";
 import Counter from "../../feature/components/Counter";
 
-function UsersContainer() {
+function UsersContainer({ customers }) {
   return (
     <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">
       <FilterUsers />
@@ -15,16 +15,17 @@ function UsersContainer() {
             <tr className="text-gray-600 bg-gray-300 dark:bg-gray-800 dark:text-white rounded-t-2xl text-center">
               <th className=" px-2">مشتری</th>
               <th>اطلاعات تماس</th>
-              <th className="py-3">تعداد سفارش</th>
-              <th>مجموع خرید</th>
+              <th className="py-3">ایمیل</th>
+              <th>نوع مشتری</th>
+              <th>شهر مشتری</th>
               <th>بدهی</th>
               <th>وضعیت</th>
-              <th>اخرین خرید</th>
+              <th>تاریخ</th>
               <th>عملیات</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((item) => (
+            {customers.map((item) => (
               <UsersItem key={item.id} {...item} />
             ))}
           </tbody>

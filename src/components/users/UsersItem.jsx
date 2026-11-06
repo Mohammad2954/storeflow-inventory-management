@@ -8,11 +8,12 @@ function UsersItem({
   code,
   name,
   phone,
-  totalOrders,
-  totalPurchases,
-  debt,
-  lastPurchaseDate,
+  email,
+  type,
+  city,
   status,
+  registerDate,
+  debt,
 }) {
   return (
     <tr className="text-center mt-2 border-t border-gray-200">
@@ -23,9 +24,10 @@ function UsersItem({
         </div>
       </td>
       <td>{phone}</td>
-      <td>{totalOrders}</td>
-      <td>{totalPurchases.toLocaleString()}</td>
-      <td>{debt.toLocaleString()}</td>
+      <td>{email}</td>
+      <td>{type}</td>
+      <td>{city}</td>
+      <td>{debt}</td>
       <td>
         <span
           className={clsx(
@@ -38,12 +40,12 @@ function UsersItem({
           {status}
         </span>
       </td>
-      <td>{lastPurchaseDate}</td>
+      <td>{registerDate}</td>
       <td>
         <div className="flex items-center justify-center gap-3">
           <FaEye className="text-gray-400 size-5" />
-          <MdOutlineModeEditOutline className="text-gray-400 size-5" />
-          <HiDotsVertical className="text-gray-400 size-5" />
+          {/* <MdOutlineModeEditOutline className="text-gray-400 size-5" />
+          <HiDotsVertical className="text-gray-400 size-5" /> */}
         </div>
       </td>
     </tr>

@@ -27,7 +27,6 @@ function AddProduct({
   const { data, loading, error, mutate } = useMutation(
     `products${method === "PATCH" ? "/" + id : ""}`,
   );
-  console.log(`products${method === "PATCH" ? "/" + id : ""}`);
 
   const funceducer = (state, action) => {
     switch (action.type) {
