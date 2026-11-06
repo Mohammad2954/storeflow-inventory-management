@@ -10,10 +10,12 @@ import UsersContainer from "../components/users/UsersContainer";
 import CardSection from "../feature/Cards/CardSection";
 import useFetch from "../hooks/useFetch";
 import { findDataCards } from "../feature/GetDataCard/findDataCards";
+import Adduser from "../components/users/Adduser";
 
 function Users() {
   const { data: customers } = useFetch("customers");
   const [dataCard, setDataCard] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (customers.length > 0) {
@@ -90,16 +92,30 @@ function Users() {
     );
     return totalSalesLast30Days;
   };
+
   return (
     <>
       <CardSection card={dataCard} />
       <div className="">
         <div className="flex items-center px-8 gap-2">
           <FaUser className="size-8" />
-          <TopPage name={"مشتریان"} btn={"افزودن مشتری"} />
+          <TopPage
+            name={"مشتریان"}
+            btn={"افزودن مشتری"}
+            func={() => {
+              setShowModal(!showModal);
+            }}
+          />
         </div>
         <UsersContainer />
       </div>
+      {showModal ? (
+        <Adduser
+          func={() => {
+            setShowModal(!showModal);
+          }}
+        />
+      ) : null}
     </>
   );
 }

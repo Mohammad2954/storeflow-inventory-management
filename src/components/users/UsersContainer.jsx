@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { users } from "../../data/users.js";
 import FilterUsers from "./FilterUsers";
 import UsersItem from "./UsersItem";
@@ -31,8 +31,8 @@ function UsersContainer() {
         </table>
       </div>
       <div className="flex justify-between mb-4 px-4">
-        <InfoCounter first={1} second={5} third={25} />
-        <Counter />
+        {/* <InfoCounter first={1} second={5} third={25} />
+        <Counter /> */}
       </div>
     </div>
   );
