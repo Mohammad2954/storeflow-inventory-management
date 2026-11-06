@@ -6,9 +6,10 @@ import InfoCounter from "../../feature/components/InfoCounter";
 import Counter from "../../feature/components/Counter";
 
 function UsersContainer({ customers }) {
+  const [filterData, setFilterData] = useState("همه مشتری ها");
   return (
     <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">
-      <FilterUsers />
+      <FilterUsers filterData={filterData} setFilterData={setFilterData} />
       <div className="px-4 rounded-t-2xl overflow-hidden border-gray-200 pb-4">
         <table className="w-full shadow-sm  rounded-t-2xl overflow-hidden">
           <thead>

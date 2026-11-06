@@ -43,7 +43,7 @@ function UsersItem({
       <td>{registerDate}</td>
       <td>
         <div className="flex items-center justify-center gap-3">
-          <FaEye className="text-gray-400 size-5" />
+          <FaEye className="text-gray-400 size-5 hover:text-blue-400 cursor-pointer" />
           {/* <MdOutlineModeEditOutline className="text-gray-400 size-5" />
           <HiDotsVertical className="text-gray-400 size-5" /> */}
         </div>
