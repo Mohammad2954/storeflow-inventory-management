@@ -5,8 +5,17 @@ import UsersItem from "./UsersItem";
 import InfoCounter from "../../feature/components/InfoCounter";
 import Counter from "../../feature/components/Counter";
 import useFetch from "../../hooks/useFetch.js";
+import { paiginationFunc } from "../../feature/Pagination/pagination.js";
+import { useNavigate, useParams } from "react-router";
 
 function UsersContainer() {
+  let param = useParams();
+  param = Number(param.page);
+  let navpage = useNavigate();
+
+  const changePage = (page) => {
+    navpage(`/users/${page}`);
+  };
   const { data: customers } = useFetch("customers");
 
   const [filterData, setFilterData] = useState("همه مشتری ها");
@@ -57,6 +66,11 @@ function UsersContainer() {
 
     setFilterItems(sortedItems);
   };
+  let { finalData, countPage, firstIndex, lastIndex } = paiginationFunc(
+    filterItems,
+    10,
+    param,
+  );
 
   return (
     <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">
@@ -84,15 +98,19 @@ function UsersContainer() {
             </tr>
           </thead>
           <tbody>
-            {filterItems.map((item) => (
+            {finalData.map((item) => (
               <UsersItem key={item.id} {...item} />
             ))}
           </tbody>
         </table>
       </div>
       <div className="flex justify-between mb-4 px-4">
-        {/* <InfoCounter first={1} second={5} third={25} />
-        <Counter /> */}
+        <InfoCounter
+          first={firstIndex + 1}
+          second={lastIndex}
+          third={finalData.length}
+        />
+        <Counter countPage={countPage} param={param} changePage={changePage} />
       </div>
     </div>
   );

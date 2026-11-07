@@ -38,7 +38,7 @@ export const sidebarItems = [
   {
     id: 7,
     title: "مشتریان",
-    path: "/users",
+    path: "/users/1",
     icon: 'FaUser' ,
   },
   {

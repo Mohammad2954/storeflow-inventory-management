@@ -25,7 +25,7 @@ const roter = createBrowserRouter([
       { path: "purchases", element: <Purchases /> },
       { path: "suppliers", element: <Suppliers /> },
       { path: "reports", element: <Reports /> },
-      { path: "users", element: <Users /> },
+      { path: "users/:page?", element: <Users /> },
       { path: "setting", element: <Setting /> },
       { path: "/*", element: <Page404 /> },
     ],
