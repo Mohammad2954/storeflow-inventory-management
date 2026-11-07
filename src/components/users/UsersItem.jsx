@@ -14,6 +14,7 @@ function UsersItem({
   status,
   registerDate,
   debt,
+  totalPurchases,
 }) {
   return (
     <tr className="text-center mt-2 border-t border-gray-200">
@@ -27,7 +28,8 @@ function UsersItem({
       <td>{email}</td>
       <td>{type}</td>
       <td>{city}</td>
-      <td>{debt}</td>
+      <td>{totalPurchases?.toLocaleString()}</td>
+      <td>{debt?.toLocaleString()}</td>
       <td>
         <span
           className={clsx(

@@ -1,15 +1,72 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { users } from "../../data/users.js";
 import FilterUsers from "./FilterUsers";
 import UsersItem from "./UsersItem";
 import InfoCounter from "../../feature/components/InfoCounter";
 import Counter from "../../feature/components/Counter";
+import useFetch from "../../hooks/useFetch.js";
 
-function UsersContainer({ customers }) {
+function UsersContainer() {
+  const { data: customers } = useFetch("customers");
+
   const [filterData, setFilterData] = useState("همه مشتری ها");
+  useEffect(() => {
+    if (customers.length > 1) {
+      FilterDataFunc(customers);
+    }
+  }, [customers, filterData]);
+
+  const [inputVal, setInputVal] = useState("");
+  const [filterItems, setFilterItems] = useState([]);
+  const clearFilter = () => {
+    setFilterData("همه مشتری ها");
+    setInputVal("");
+  };
+
+  const FilterDataFunc = (items) => {
+    let sortedItems = [...items];
+
+    switch (filterData) {
+      case "بیشترین خرید":
+        sortedItems.sort((a, b) => b.totalPurchases - a.totalPurchases);
+        break;
+
+      case "کمترین خرید":
+        sortedItems.sort((a, b) => a.totalPurchases - b.totalPurchases);
+        break;
+
+      case "بیشترین بدهی":
+        sortedItems.sort((a, b) => b.debt - a.debt);
+        break;
+
+      case "نوع مشتری":
+        sortedItems.sort((a, b) => {
+          const priority = {
+            new: 1,
+            regular: 2,
+          };
+
+          return (priority[a.type] ?? 3) - (priority[b.type] ?? 3);
+        });
+        break;
+
+      default:
+        sortedItems = [...items];
+        break;
+    }
+
+    setFilterItems(sortedItems);
+  };
+
   return (
     <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">
-      <FilterUsers filterData={filterData} setFilterData={setFilterData} />
+      <FilterUsers
+        clearFilter={clearFilter}
+        filterData={filterData}
+        setFilterData={setFilterData}
+        inputVal={inputVal}
+        setInputVal={setInputVal}
+      />
       <div className="px-4 rounded-t-2xl overflow-hidden border-gray-200 pb-4">
         <table className="w-full shadow-sm  rounded-t-2xl overflow-hidden">
           <thead>
@@ -19,6 +76,7 @@ function UsersContainer({ customers }) {
               <th className="py-3">ایمیل</th>
               <th>نوع مشتری</th>
               <th>شهر مشتری</th>
+              <th>خرید مشتری</th>
               <th>بدهی</th>
               <th>وضعیت</th>
               <th>تاریخ</th>
@@ -26,7 +84,7 @@ function UsersContainer({ customers }) {
             </tr>
           </thead>
           <tbody>
-            {customers.map((item) => (
+            {filterItems.map((item) => (
               <UsersItem key={item.id} {...item} />
             ))}
           </tbody>
