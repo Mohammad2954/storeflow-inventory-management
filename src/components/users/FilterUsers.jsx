@@ -13,7 +13,7 @@ function FilterUsers({
   const [show, setShow] = useState(false);
   return (
     <div className="flex items-center p-4">
-      <div className="flex items-center relative w-xl">
+      {/* <div className="flex items-center relative w-xl">
         <CiSearch className=" absolute right-0 z-10 size-5" />
         <input
           value={inputVal}
@@ -24,7 +24,7 @@ function FilterUsers({
           type="text"
           placeholder="جستجو نام کد یا شماره تماس  ..."
         />
-      </div>
+      </div> */}
       <div className="flex items-center gap-4 w-full pr-4">
         <div
           onClick={() => {

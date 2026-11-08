@@ -172,7 +172,7 @@ function Users() {
             }}
           />
         </div>
-        <UsersContainer customers={customers} />
+        <UsersContainer />
       </div>
       {showModal ? (
         <Adduser

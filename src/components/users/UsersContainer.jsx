@@ -108,7 +108,7 @@ function UsersContainer() {
         <InfoCounter
           first={firstIndex + 1}
           second={lastIndex}
-          third={finalData.length}
+          third={filterItems.length}
         />
         <Counter countPage={countPage} param={param} changePage={changePage} />
       </div>

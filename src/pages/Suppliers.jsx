@@ -10,8 +10,10 @@ import {
 import CardSection from "../feature/Cards/CardSection";
 import { findDataCards } from "../feature/GetDataCard/findDataCards";
 import useFetch from "../hooks/useFetch";
+import AddSupliser from "../components/suppliser/AddSupliser";
 
 function Suppliers() {
+  const [showModal, setShowModal] = useState(false);
   const { data: suppliers } = useFetch("suppliers");
   const [dataCard, setDataCard] = useState([]);
 
@@ -83,10 +85,23 @@ function Suppliers() {
       <div className="">
         <div className="flex items-center px-8 gap-2">
           <FaUsers className="size-8" />
-          <TopPage name={"تامین کنندگان"} btn={"افزودن تامین کننده"} />
+          <TopPage
+            name={"تامین کنندگان"}
+            btn={"افزودن تامین کننده"}
+            func={() => {
+              setShowModal(!showModal);
+            }}
+          />
         </div>
         <SuppliserContainer />
       </div>
+      {showModal ? (
+        <AddSupliser
+          func={() => {
+            setShowModal(!showModal);
+          }}
+        />
+      ) : null}
     </>
   );
 }
