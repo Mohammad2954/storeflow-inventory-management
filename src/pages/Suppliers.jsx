@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import TopPage from "../feature/components/TopPage";
 import SuppliserContainer from "../components/suppliser/SuppliserContainer";
 import {
@@ -16,6 +16,21 @@ function Suppliers() {
   const [showModal, setShowModal] = useState(false);
   const { data: suppliers } = useFetch("suppliers");
   const [dataCard, setDataCard] = useState([]);
+  const reducer = (state, action) => {};
+  const [state, dispatch] = useReducer(reducer, {
+    nameSuppliser: "",
+    phone: "",
+    telephoneNumber: "",
+    namePersonalContact: "",
+    email: "",
+    province: "",
+    city: "",
+    address: "",
+    codeAddress: "",
+    category: "",
+    paymentdeadline: "",
+    description: "",
+  });
 
   useEffect(() => {
     if (suppliers.length > 0) {

@@ -32,7 +32,7 @@ function AddSupliser({ func }) {
               // }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
-              placeholder="نام مشتری را وارد کنید"
+              placeholder="نام تامین کننده را وارد کنید"
             />
           </div>
 
@@ -47,7 +47,7 @@ function AddSupliser({ func }) {
               // }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
-              placeholder="نام مشتری را وارد کنید"
+              placeholder="تلفن ثابت را وارد کنید"
             />
           </div>
           <div className="flex flex-col gap-1.5 px-3">
@@ -61,7 +61,7 @@ function AddSupliser({ func }) {
               // }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
-              placeholder="نام مشتری را وارد کنید"
+              placeholder="شماره موبایل را وارد کنید"
             />
           </div>
           <div className="flex flex-col gap-1.5 px-3">
@@ -75,7 +75,7 @@ function AddSupliser({ func }) {
               // }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
-              placeholder=" شماره تلفن مشتری را وارد کنید"
+              placeholder="نام شخص رابط را وارد کنید "
             />
           </div>
 
@@ -90,7 +90,7 @@ function AddSupliser({ func }) {
               //   }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
-              placeholder="ایمیل مشتری را وارد کنید"
+              placeholder="ایمیل را وارد کنید"
             />
           </div>
         </div>
@@ -107,7 +107,7 @@ function AddSupliser({ func }) {
               // }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
-              placeholder="نام مشتری را وارد کنید"
+              placeholder="استان را وارد کنید"
             />
           </div>
 
@@ -122,7 +122,7 @@ function AddSupliser({ func }) {
               // }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
-              placeholder="نام مشتری را وارد کنید"
+              placeholder="شهر را وارد کنید"
             />
           </div>
           <div className="flex flex-col gap-1.5 px-3">
@@ -136,7 +136,7 @@ function AddSupliser({ func }) {
               // }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
-              placeholder="نام مشتری را وارد کنید"
+              placeholder="آدرس را وارد کنید"
             />
           </div>
           <div className="flex flex-col gap-1.5 px-3">
@@ -150,7 +150,7 @@ function AddSupliser({ func }) {
               // }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
-              placeholder=" شماره تلفن مشتری را وارد کنید"
+              placeholder="کد پستی را وارد کنید"
             />
           </div>
         </div>
@@ -167,7 +167,7 @@ function AddSupliser({ func }) {
               // }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
-              placeholder="نام مشتری را وارد کنید"
+              placeholder="دسته بندی تامین کننده را وارد کنید"
             />
           </div>
 
@@ -182,7 +182,7 @@ function AddSupliser({ func }) {
               // }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
-              placeholder="نام مشتری را وارد کنید"
+              placeholder="مهلت پرداخت را وارد کنید"
             />
           </div>
           <div className="flex flex-col gap-1.5 px-3">
@@ -196,7 +196,7 @@ function AddSupliser({ func }) {
               // }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
-              placeholder="نام مشتری را وارد کنید"
+              placeholder="توضیحات را وارد کنید"
             />
           </div>
         </div>
