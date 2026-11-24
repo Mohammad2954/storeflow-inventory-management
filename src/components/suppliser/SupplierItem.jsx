@@ -13,6 +13,9 @@ function SupplierItem({
   debt,
   status,
   contactPerson,
+  getSuppliser,
+  id,
+  showDetail,
 }) {
   return (
     <tr className="text-center mt-2 border-t border-gray-200">
@@ -43,7 +46,13 @@ function SupplierItem({
       </td>
       <td>
         <div className="flex items-center justify-center gap-3">
-          <FaEye className="text-gray-400 size-5" />
+          <FaEye
+            className="text-gray-400 size-5 cursor-pointer hover:text-blue-500 transition duration-300 ease-in"
+            onClick={() => {
+              getSuppliser(id);
+              showDetail();
+            }}
+          />
           <MdOutlineModeEditOutline className="text-gray-400 size-5" />
           <HiDotsVertical className="text-gray-400 size-5" />
         </div>
