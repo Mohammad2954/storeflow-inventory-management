@@ -11,11 +11,14 @@ import CardSection from "../feature/Cards/CardSection";
 import { findDataCards } from "../feature/GetDataCard/findDataCards";
 import useFetch from "../hooks/useFetch";
 import AddSupliser from "../components/suppliser/AddSupliser";
+import toast from "react-hot-toast";
+import useMutation from "../hooks/useMutation";
 
 function Suppliers() {
   const [showModal, setShowModal] = useState(false);
   const { data: suppliers } = useFetch("suppliers");
   const [dataCard, setDataCard] = useState([]);
+  const { data, loading, error, mutate } = useMutation("suppliers");
   const reducer = (state, action) => {
     switch (action.type) {
       case "nameSuppliser":
@@ -42,6 +45,8 @@ function Suppliers() {
         return { ...state, paymentdeadline: action.value };
       case "description":
         return { ...state, description: action.value };
+      case "code":
+        return { ...state, code: action.value };
 
       default:
         return state;
@@ -60,7 +65,38 @@ function Suppliers() {
     category: "",
     paymentdeadline: "",
     description: "",
+    code: "",
   });
+  const addToForm = () => {
+    return {
+      name: state.nameSuppliser.trim(),
+      contactPerson: state.namePersonalContact.trim(),
+      phone: state.phone.trim(),
+      mobile: state.telephoneNumber.trim(),
+      province: state.province.trim(),
+      city: state.city.trim(),
+      address: state.address.trim(),
+      postalCode: state.codeAddress.trim(),
+      category: state.category.trim(),
+      lastPurchaseDate: state.paymentdeadline.trim(),
+      description: state.description.trim(),
+      code: state.code.trim(),
+    };
+  };
+
+  const sendForm = async () => {
+    try {
+      const customerData = addToForm();
+
+      await mutate("POST", customerData);
+
+      toast.success("مشتری با موفقیت اضافه شد");
+      setShowModal(!showModal);
+    } catch (error) {
+      console.error("Customer API error:", error);
+      toast.error(error.message || "ثبت مشتری ناموفق بود");
+    }
+  };
 
   useEffect(() => {
     if (suppliers.length > 0) {
@@ -138,10 +174,11 @@ function Suppliers() {
             }}
           />
         </div>
-        <SuppliserContainer />
+        <SuppliserContainer suppliers={suppliers} />
       </div>
       {showModal ? (
         <AddSupliser
+          sendForm={sendForm}
           state={state}
           dispatch={dispatch}
           func={() => {

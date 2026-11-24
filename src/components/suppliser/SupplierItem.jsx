@@ -12,6 +12,7 @@ function SupplierItem({
   totalPurchases,
   debt,
   status,
+  contactPerson,
 }) {
   return (
     <tr className="text-center mt-2 border-t border-gray-200">
@@ -22,9 +23,12 @@ function SupplierItem({
         </div>
       </td>
       <td>{category}</td>
-      <td>{phone}</td>
-      <td>{totalPurchases.toLocaleString()}</td>
-      <td>{debt.toLocaleString()}</td>
+      <td className="flex flex-col">
+        <span>{phone}</span>
+        <span className="text-[13px] font-bold">{contactPerson}</span>
+      </td>
+      <td>{totalPurchases ? totalPurchases.toLocaleString() : "Nan"}</td>
+      <td>{debt ? debt.toLocaleString() : "Nan"}</td>
       <td>
         <span
           className={clsx(

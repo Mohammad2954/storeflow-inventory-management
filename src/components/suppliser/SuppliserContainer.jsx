@@ -1,12 +1,11 @@
 import React from "react";
 import FilterEnventoryItem from "../Storeroom/FilterEnventoryItem";
-import { suppliers } from "../../data/suppliers.js";
 import FilterSupplier from "./FilterSupplier.jsx";
 import SupplierItem from "./SupplierItem.jsx";
 import InfoCounter from "../../feature/components/InfoCounter.jsx";
 import Counter from "../../feature/components/Counter.jsx";
 
-function SuppliserContainer() {
+function SuppliserContainer({ suppliers }) {
   return (
     <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">
       <FilterSupplier />

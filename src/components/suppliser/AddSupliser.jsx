@@ -3,7 +3,7 @@ import { AiFillProduct } from "react-icons/ai";
 import { CiSaveDown2 } from "react-icons/ci";
 import { IoClose } from "react-icons/io5";
 
-function AddSupliser({ func, state, dispatch }) {
+function AddSupliser({ func, state, dispatch, sendForm }) {
   return (
     <div className="bg-black/15 backdrop-blur-sm w-full h-full fixed left-0 right-0 bottom-0 top-0">
       <div className="w-2xl bg-white dark:bg-gray-800 z-1000 py-4 rounded-xl shadow-sm m-8 absolute left-1/5 -top-6 backdrop-blur-2xl ">
@@ -29,6 +29,20 @@ function AddSupliser({ func, state, dispatch }) {
               value={state.nameSuppliser}
               onChange={(event) => {
                 dispatch({ type: "nameSuppliser", value: event.target.value });
+              }}
+              className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
+              type="text"
+              placeholder="نام تامین کننده را وارد کنید"
+            />
+          </div>
+          <div className="flex flex-col gap-1.5 px-3">
+            <label className="text-sm font-bold" htmlFor="">
+              کد تامین کننده
+            </label>
+            <input
+              value={state.code}
+              onChange={(event) => {
+                dispatch({ type: "code", value: event.target.value });
               }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
@@ -212,9 +226,9 @@ function AddSupliser({ func, state, dispatch }) {
 
         <div className="grid grid-cols-2 gap-4 px-4 pt-4">
           <button
-            // onClick={() => {
-            //   sendForm();
-            // }}
+            onClick={() => {
+              sendForm();
+            }}
             className="w-full py-3 border border-gray-300 shadow-sm rounded-lg cursor-pointer hover:bg-accent-hover font-bold hover:text-white transition duration-300 flex items-center justify-center gap-2"
           >
             اضافه کردن مشتری
