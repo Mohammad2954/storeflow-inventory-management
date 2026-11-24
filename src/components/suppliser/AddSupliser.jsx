@@ -3,7 +3,7 @@ import { AiFillProduct } from "react-icons/ai";
 import { CiSaveDown2 } from "react-icons/ci";
 import { IoClose } from "react-icons/io5";
 
-function AddSupliser({ func }) {
+function AddSupliser({ func, state, dispatch }) {
   return (
     <div className="bg-black/15 backdrop-blur-sm w-full h-full fixed left-0 right-0 bottom-0 top-0">
       <div className="w-2xl bg-white dark:bg-gray-800 z-1000 py-4 rounded-xl shadow-sm m-8 absolute left-1/5 -top-6 backdrop-blur-2xl ">
@@ -26,10 +26,10 @@ function AddSupliser({ func }) {
               نام تامین کننده
             </label>
             <input
-              // value={state.name}
-              // onChange={(event) => {
-              //   dispatch({ type: "name", value: event.target.value });
-              // }}
+              value={state.nameSuppliser}
+              onChange={(event) => {
+                dispatch({ type: "nameSuppliser", value: event.target.value });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="نام تامین کننده را وارد کنید"
@@ -41,10 +41,10 @@ function AddSupliser({ func }) {
               تلفن ثابت
             </label>
             <input
-              // value={state.name}
-              // onChange={(event) => {
-              //   dispatch({ type: "name", value: event.target.value });
-              // }}
+              value={state.phone}
+              onChange={(event) => {
+                dispatch({ type: "phone", value: event.target.value });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="تلفن ثابت را وارد کنید"
@@ -55,10 +55,13 @@ function AddSupliser({ func }) {
               شماره موبایل
             </label>
             <input
-              // value={state.name}
-              // onChange={(event) => {
-              //   dispatch({ type: "name", value: event.target.value });
-              // }}
+              value={state.telephoneNumber}
+              onChange={(event) => {
+                dispatch({
+                  type: "telephoneNumber",
+                  value: event.target.value,
+                });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="شماره موبایل را وارد کنید"
@@ -69,10 +72,13 @@ function AddSupliser({ func }) {
               نام شخص رابط
             </label>
             <input
-              // value={state.phone}
-              // onChange={(event) => {
-              //   dispatch({ type: "phone", value: event.target.value });
-              // }}
+              value={state.namePersonalContact}
+              onChange={(event) => {
+                dispatch({
+                  type: "namePersonalContact",
+                  value: event.target.value,
+                });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="نام شخص رابط را وارد کنید "
@@ -84,10 +90,10 @@ function AddSupliser({ func }) {
               ایمیل
             </label>
             <input
-              //   value={state.email}
-              //   onChange={(event) => {
-              //     dispatch({ type: "email", value: event.target.value });
-              //   }}
+              value={state.email}
+              onChange={(event) => {
+                dispatch({ type: "email", value: event.target.value });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="ایمیل را وارد کنید"
@@ -101,10 +107,10 @@ function AddSupliser({ func }) {
               استان
             </label>
             <input
-              // value={state.name}
-              // onChange={(event) => {
-              //   dispatch({ type: "name", value: event.target.value });
-              // }}
+              value={state.province}
+              onChange={(event) => {
+                dispatch({ type: "province", value: event.target.value });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="استان را وارد کنید"
@@ -116,10 +122,10 @@ function AddSupliser({ func }) {
               شهر
             </label>
             <input
-              // value={state.name}
-              // onChange={(event) => {
-              //   dispatch({ type: "name", value: event.target.value });
-              // }}
+              value={state.city}
+              onChange={(event) => {
+                dispatch({ type: "city", value: event.target.value });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="شهر را وارد کنید"
@@ -130,10 +136,10 @@ function AddSupliser({ func }) {
               آدرس
             </label>
             <input
-              // value={state.name}
-              // onChange={(event) => {
-              //   dispatch({ type: "name", value: event.target.value });
-              // }}
+              value={state.address}
+              onChange={(event) => {
+                dispatch({ type: "address", value: event.target.value });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="آدرس را وارد کنید"
@@ -144,10 +150,10 @@ function AddSupliser({ func }) {
               کد پستی
             </label>
             <input
-              // value={state.phone}
-              // onChange={(event) => {
-              //   dispatch({ type: "phone", value: event.target.value });
-              // }}
+              value={state.codeAddress}
+              onChange={(event) => {
+                dispatch({ type: "codeAddress", value: event.target.value });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="کد پستی را وارد کنید"
@@ -161,10 +167,10 @@ function AddSupliser({ func }) {
               دسته بندی تامین کننده
             </label>
             <input
-              // value={state.name}
-              // onChange={(event) => {
-              //   dispatch({ type: "name", value: event.target.value });
-              // }}
+              value={state.category}
+              onChange={(event) => {
+                dispatch({ type: "category", value: event.target.value });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="دسته بندی تامین کننده را وارد کنید"
@@ -176,10 +182,13 @@ function AddSupliser({ func }) {
               مهلت پرداخت
             </label>
             <input
-              // value={state.name}
-              // onChange={(event) => {
-              //   dispatch({ type: "name", value: event.target.value });
-              // }}
+              value={state.paymentdeadline}
+              onChange={(event) => {
+                dispatch({
+                  type: "paymentdeadline",
+                  value: event.target.value,
+                });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="مهلت پرداخت را وارد کنید"
@@ -190,10 +199,10 @@ function AddSupliser({ func }) {
               توضیحات
             </label>
             <textarea
-              // value={state.name}
-              // onChange={(event) => {
-              //   dispatch({ type: "name", value: event.target.value });
-              // }}
+              value={state.description}
+              onChange={(event) => {
+                dispatch({ type: "description", value: event.target.value });
+              }}
               className="outline-none border border-gray-300 rounded-lg py-1.5 pr-2 text-sm"
               type="text"
               placeholder="توضیحات را وارد کنید"

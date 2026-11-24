@@ -16,7 +16,37 @@ function Suppliers() {
   const [showModal, setShowModal] = useState(false);
   const { data: suppliers } = useFetch("suppliers");
   const [dataCard, setDataCard] = useState([]);
-  const reducer = (state, action) => {};
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "nameSuppliser":
+        return { ...state, nameSuppliser: action.value };
+      case "phone":
+        return { ...state, phone: action.value };
+      case "telephoneNumber":
+        return { ...state, telephoneNumber: action.value };
+      case "namePersonalContact":
+        return { ...state, namePersonalContact: action.value };
+      case "email":
+        return { ...state, email: action.value };
+      case "province":
+        return { ...state, province: action.value };
+      case "city":
+        return { ...state, city: action.value };
+      case "address":
+        return { ...state, address: action.value };
+      case "codeAddress":
+        return { ...state, codeAddress: action.value };
+      case "category":
+        return { ...state, category: action.value };
+      case "paymentdeadline":
+        return { ...state, paymentdeadline: action.value };
+      case "description":
+        return { ...state, description: action.value };
+
+      default:
+        return state;
+    }
+  };
   const [state, dispatch] = useReducer(reducer, {
     nameSuppliser: "",
     phone: "",
@@ -112,6 +142,8 @@ function Suppliers() {
       </div>
       {showModal ? (
         <AddSupliser
+          state={state}
+          dispatch={dispatch}
           func={() => {
             setShowModal(!showModal);
           }}
