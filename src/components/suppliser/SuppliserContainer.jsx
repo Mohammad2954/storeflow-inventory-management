@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FilterEnventoryItem from "../Storeroom/FilterEnventoryItem";
 import FilterSupplier from "./FilterSupplier.jsx";
 import SupplierItem from "./SupplierItem.jsx";
 import InfoCounter from "../../feature/components/InfoCounter.jsx";
 import Counter from "../../feature/components/Counter.jsx";
 import SupplierDetails from "./SupplierDetails.jsx";
+import useFetch from "../../hooks/useFetch.js";
+import useMutation from "../../hooks/useMutation.js";
 
 function SuppliserContainer({ suppliers }) {
+  const [supplier, setSupplier] = useState(null);
   const [show, setShow] = useState(false);
-  const getSuppliser = (id) => {};
+  const getSuppliser = async (id) => {
+    const data = suppliers.find((e) => e.id == id);
+
+    setSupplier(data);
+    setShow(!show);
+  };
+
   return (
     <>
       <div className="w-full border border-gray-200 rounded-2xl overflow-hidden mt-8 shadow-sm bg-white dark:bg-gray-800">
@@ -32,9 +41,6 @@ function SuppliserContainer({ suppliers }) {
                   key={item.id}
                   {...item}
                   getSuppliser={getSuppliser}
-                  showDetail={() => {
-                    setShow(!show);
-                  }}
                 />
               ))}
             </tbody>
@@ -45,7 +51,9 @@ function SuppliserContainer({ suppliers }) {
         <Counter /> */}
         </div>
       </div>
-      {show ? <SupplierDetails /> : null}
+      {show ? (
+        <SupplierDetails show={show} setShow={setShow} supplier={supplier} />
+      ) : null}
     </>
   );
 }

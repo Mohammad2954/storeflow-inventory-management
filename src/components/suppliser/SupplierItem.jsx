@@ -15,7 +15,6 @@ function SupplierItem({
   contactPerson,
   getSuppliser,
   id,
-  showDetail,
 }) {
   return (
     <tr className="text-center mt-2 border-t border-gray-200">
@@ -50,7 +49,6 @@ function SupplierItem({
             className="text-gray-400 size-5 cursor-pointer hover:text-blue-500 transition duration-300 ease-in"
             onClick={() => {
               getSuppliser(id);
-              showDetail();
             }}
           />
           <MdOutlineModeEditOutline className="text-gray-400 size-5" />
