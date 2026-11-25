@@ -15,6 +15,7 @@ function SupplierItem({
   contactPerson,
   getSuppliser,
   id,
+  changeShoeEdit,
 }) {
   return (
     <tr className="text-center mt-2 border-t border-gray-200">
@@ -51,7 +52,12 @@ function SupplierItem({
               getSuppliser(id);
             }}
           />
-          <MdOutlineModeEditOutline className="text-gray-400 size-5" />
+          <MdOutlineModeEditOutline
+            className="text-gray-400 size-5 cursor-pointer hover:text-blue-500 transition duration-300 ease-in"
+            onClick={() => {
+              changeShoeEdit();
+            }}
+          />
           <HiDotsVertical className="text-gray-400 size-5" />
         </div>
       </td>

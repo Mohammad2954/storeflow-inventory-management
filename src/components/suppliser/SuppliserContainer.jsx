@@ -7,9 +7,12 @@ import Counter from "../../feature/components/Counter.jsx";
 import SupplierDetails from "./SupplierDetails.jsx";
 import useFetch from "../../hooks/useFetch.js";
 import useMutation from "../../hooks/useMutation.js";
+import SupplierEditModal from "./SupplierEditModal.jsx";
+import SupplierEdit from "./SupplierEditModal.jsx";
 
 function SuppliserContainer({ suppliers }) {
   const [supplier, setSupplier] = useState(null);
+  const [edit, setEdit] = useState(false);
   const [show, setShow] = useState(false);
   const getSuppliser = async (id) => {
     const data = suppliers.find((e) => e.id == id);
@@ -41,6 +44,9 @@ function SuppliserContainer({ suppliers }) {
                   key={item.id}
                   {...item}
                   getSuppliser={getSuppliser}
+                  changeShoeEdit={() => {
+                    setEdit(!edit);
+                  }}
                 />
               ))}
             </tbody>
@@ -53,6 +59,13 @@ function SuppliserContainer({ suppliers }) {
       </div>
       {show ? (
         <SupplierDetails show={show} setShow={setShow} supplier={supplier} />
+      ) : null}
+      {edit ? (
+        <SupplierEdit
+          changeShoeEdit={() => {
+            setEdit(!edit);
+          }}
+        />
       ) : null}
     </>
   );
