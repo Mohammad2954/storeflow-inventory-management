@@ -9,15 +9,15 @@ import useFetch from "../../hooks/useFetch.js";
 import useMutation from "../../hooks/useMutation.js";
 import SupplierEditModal from "./SupplierEditModal.jsx";
 import SupplierEdit from "./SupplierEditModal.jsx";
+import { getData } from "../../feature/Getdata/getData.js";
 
 function SuppliserContainer({ suppliers }) {
   const [supplier, setSupplier] = useState(null);
-  const [supplierEdit, setSupplierEdit] = useState(null);
   const [edit, setEdit] = useState(false);
   const [show, setShow] = useState(false);
 
   const reduce = (state, action) => {
-    switch (key) {
+    switch (action.type) {
       case "address":
         return { ...state, address: action.value };
       case "category":
@@ -60,33 +60,35 @@ function SuppliserContainer({ suppliers }) {
         return { ...state, status: action.value };
       case "totalPurchases":
         return { ...state, totalPurchases: action.value };
-
+      case "changeAll":
+        return { ...state, ...action.value };
       default:
         return state;
     }
   };
   const [state, dispatch] = useReducer(reduce, {
-    address: "اصفهان، خیابان جی، خیابان شهیدان",
-    category: "مواد غذایی",
-    city: "اصفهان",
-    code: "SUP-001",
-    contactPerson: "علی رضایی",
-    debt: 35000000,
-    description: "تأمین‌کننده مواد غذایی و کالاهای مصرفی فروشگاه",
-    email: "sales@behngostar.example",
-    lastPurchaseDate: "1405/07/28",
-    mobile: "09131234561",
-    name: "شرکت پخش بهین‌گستر",
-    paidAmount: 150000000,
-    paymentTerm: "30 روزه",
-    phone: "03136621001",
-    postalCode: "8156789123",
-    productsCount: 24,
-    province: "اصفهان",
-    rating: 4.8,
-    startDate: "1404/02/15",
-    status: "active",
-    totalPurchases: 185000000,
+    address: "",
+    category: "",
+    city: "",
+    code: "",
+    contactPerson: "",
+    debt: "",
+    description: "",
+    email: "",
+    lastPurchaseDate: "",
+    mobile: "",
+    name: "",
+    paidAmount: "",
+    paymentTerm: "",
+    phone: "",
+    postalCode: "",
+    productsCount: "",
+    province: "",
+    rating: "",
+    startDate: "",
+    status: "",
+    totalPurchases: "",
+    id: "",
   });
 
   const getSuppliser = async (id) => {
@@ -98,8 +100,14 @@ function SuppliserContainer({ suppliers }) {
 
   const getSuppliserEdit = async (id) => {
     const data = suppliers.find((e) => e.id == id);
-    // await useFetch(`suppliers/${id}`,"PATCH",state)
-    setSupplierEdit(data);
+    dispatch({ type: "changeAll", value: data });
+
+    setEdit(!edit);
+  };
+  const sendEdit = async () => {
+    const result = await getData(`suppliers/${state.id}`, "PATCH", state);
+    console.log(result);
+
     setEdit(!edit);
   };
 
@@ -144,7 +152,7 @@ function SuppliserContainer({ suppliers }) {
         <SupplierEdit
           state={state}
           dispatch={dispatch}
-          supplierEdit={supplierEdit}
+          sendEdit={sendEdit}
           changeShoeEdit={() => {
             setEdit(!edit);
           }}
