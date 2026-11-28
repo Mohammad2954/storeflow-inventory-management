@@ -2,7 +2,8 @@ import clsx from "clsx";
 import React from "react";
 import { FaEye } from "react-icons/fa";
 import { HiDotsVertical } from "react-icons/hi";
-import { MdOutlineModeEditOutline } from "react-icons/md";
+import { MdOutlineModeEditOutline, MdOutlinePayment } from "react-icons/md";
+import { RiShoppingBasket2Fill } from "react-icons/ri";
 
 function SupplierItem({
   code,
@@ -15,7 +16,7 @@ function SupplierItem({
   contactPerson,
   getSuppliser,
   id,
-  changeShoeEdit,
+  getSuppliserEdit,
 }) {
   return (
     <tr className="text-center mt-2 border-t border-gray-200">
@@ -55,10 +56,11 @@ function SupplierItem({
           <MdOutlineModeEditOutline
             className="text-gray-400 size-5 cursor-pointer hover:text-blue-500 transition duration-300 ease-in"
             onClick={() => {
-              changeShoeEdit();
+              getSuppliserEdit(id);
             }}
           />
-          <HiDotsVertical className="text-gray-400 size-5" />
+          <RiShoppingBasket2Fill className="text-gray-400 size-5 cursor-pointer hover:text-blue-500 transition duration-300 ease-in" />
+          <MdOutlinePayment className="text-gray-400 size-5 cursor-pointer hover:text-blue-500 transition duration-300 ease-in" />
         </div>
       </td>
     </tr>

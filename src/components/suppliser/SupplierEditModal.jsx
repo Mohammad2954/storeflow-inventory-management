@@ -11,55 +11,64 @@ import {
   FiEdit3,
 } from "react-icons/fi";
 
-const supplier = {
-  name: "پخش نوشیدنی آریا",
-  code: "SUP-002",
-  category: "نوشیدنی",
-  contactPerson: "محمد کریمی",
-  mobile: "09131234562",
-  phone: "03132221002",
-  email: "orders@aria.example",
-  province: "اصفهان",
-  city: "اصفهان",
-  address: "اصفهان، خیابان کاوه، محدوده صنعتی",
-  postalCode: "8135678912",
-  paymentTerm: "نقدی",
-  startDate: "1404/05/10",
-  description: "تأمین انواع نوشیدنی، آب معدنی و آبمیوه",
-};
+export default function SupplierEdit({
+  changeShoeEdit,
+  supplierEdit,
+  state,
+  dispatch,
+}) {
+  const inputClass =
+    "w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10";
 
-function Field({ label, value, icon: Icon, full = false }) {
-  return (
-    <div className={full ? "sm:col-span-2" : ""}>
-      <label className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
-        {Icon && <Icon size={16} className="text-emerald-600" />}
-        {label}
-      </label>
+  const labelClass =
+    "mb-2 flex items-center gap-2 text-sm font-medium text-slate-700";
 
-      <input
-        defaultValue={value}
-        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10"
-      />
-    </div>
-  );
-}
+  const handleChange = (e) => {
+    dispatch({
+      type: e.target.name,
+      value: e.target.value,
+    });
+  };
 
-function Section({ title, icon: Icon, children }) {
-  return (
-    <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
-      <div className="flex items-center gap-2 border-b border-slate-100 bg-gradient-to-l from-emerald-50 to-slate-50 px-4 py-3.5">
-        <Icon size={19} className="text-emerald-600" />
-        <h3 className="text-sm font-bold text-slate-800">{title}</h3>
-      </div>
+  const fields = [
+    {
+      title: "اطلاعات عمومی",
+      icon: FiPackage,
+      items: [
+        { label: "نام تأمین‌کننده", key: "name", icon: FiPackage },
+        { label: "تاریخ شروع همکاری", key: "startDate", icon: FiCalendar },
+      ],
+    },
+    {
+      title: "اطلاعات تماس",
+      icon: FiPhone,
+      items: [
+        { label: "نام مسئول ارتباط", key: "contactPerson", icon: FiUser },
+        { label: "شماره موبایل", key: "mobile", icon: FiPhone },
+        { label: "تلفن ثابت", key: "phone", icon: FiPhone },
+        { label: "ایمیل", key: "email", icon: FiMail },
+      ],
+    },
+    {
+      title: "اطلاعات مکانی",
+      icon: FiMapPin,
+      items: [
+        { label: "استان", key: "province", icon: FiMapPin },
+        { label: "شهر", key: "city", icon: FiMapPin },
+        { label: "کد پستی", key: "postalCode", icon: FiMapPin },
+        {
+          label: "آدرس کامل",
+          key: "address",
+          icon: FiMapPin,
+          full: true,
+        },
+      ],
+    },
+  ];
 
-      <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-5">
-        {children}
-      </div>
-    </section>
-  );
-}
+  // مقدار فیلد از state و در غیر این صورت از supplierEdit خوانده می‌شود.
+  const getValue = (key) => state?.[key] ?? supplierEdit?.[key] ?? "";
 
-export default function SupplierEdit({ changeShoeEdit }) {
   return (
     <div
       dir="rtl"
@@ -67,10 +76,8 @@ export default function SupplierEdit({ changeShoeEdit }) {
     >
       <div className="flex max-h-[94vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
         {/* Header */}
-        <header className="relative shrink-0 overflow-hidden bg-gradient-to-l from-slate-900 via-[#172b4d] to-slate-800 px-5 py-6 text-white sm:px-7">
-          <div className="absolute -left-12 -top-20 h-56 w-56 rounded-full bg-emerald-500/10" />
-
-          <div className="relative flex items-center justify-between gap-4">
+        <header className="shrink-0 bg-gradient-to-l from-slate-900 via-[#172b4d] to-slate-800 px-5 py-6 text-white sm:px-7">
+          <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-emerald-400">
                 <FiEdit3 size={28} />
@@ -78,148 +85,193 @@ export default function SupplierEdit({ changeShoeEdit }) {
 
               <div>
                 <h2 className="text-xl font-extrabold">ویرایش تأمین‌کننده</h2>
-                <p className="mt-2 text-sm text-slate-300">{supplier.name}</p>
-                <span className="mt-2 inline-block rounded-lg bg-white/10 px-3 py-1 text-xs text-slate-200">
-                  {supplier.code}
+
+                <p className="mt-2 text-sm text-slate-300">
+                  {getValue("name")}
+                </p>
+
+                <span className="mt-2 inline-block rounded-lg bg-white/10 px-3 py-1 text-xs">
+                  {supplierEdit?.code}
                 </span>
               </div>
             </div>
 
             <button
-              onClick={() => {
-                changeShoeEdit();
-              }}
-              className="cursor-pointer flex h-10 w-10 items-center justify-center rounded-xl text-slate-300 transition hover:bg-white/10 hover:text-white"
+              type="button"
+              onClick={changeShoeEdit}
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl text-slate-300 transition hover:bg-white/10 hover:text-white"
             >
               <FiX size={22} />
             </button>
           </div>
         </header>
 
-        {/* Form design */}
-        <main className="flex-1 space-y-5 overflow-y-auto bg-slate-50/60 p-4 sm:p-6">
-          <Section title="اطلاعات عمومی" icon={FiPackage}>
-            <Field
-              label="نام تأمین‌کننده"
-              value={supplier.name}
-              icon={FiPackage}
-            />
+        {/* Form */}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            console.log(state);
+          }}
+          className="flex min-h-0 flex-1 flex-col"
+        >
+          <main className="flex-1 space-y-5 overflow-y-auto bg-slate-50/60 p-4 sm:p-6">
+            {fields.map((section) => {
+              const SectionIcon = section.icon;
 
-            <div>
-              <label className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
-                <FiPackage size={16} className="text-emerald-600" />
-                دسته‌بندی
-              </label>
-              <select
-                defaultValue={supplier.category}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-emerald-500"
+              return (
+                <section
+                  key={section.title}
+                  className="overflow-hidden rounded-2xl border border-slate-200 bg-white"
+                >
+                  <div className="flex items-center gap-2 border-b border-slate-100 bg-gradient-to-l from-emerald-50 to-slate-50 px-4 py-3.5">
+                    <SectionIcon size={19} className="text-emerald-600" />
+
+                    <h3 className="text-sm font-bold text-slate-800">
+                      {section.title}
+                    </h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-5">
+                    {section.items.map((field) => {
+                      const FieldIcon = field.icon;
+
+                      return (
+                        <div
+                          key={field.key}
+                          className={field.full ? "sm:col-span-2" : ""}
+                        >
+                          <label htmlFor={field.key} className={labelClass}>
+                            <FieldIcon size={16} className="text-emerald-600" />
+                            {field.label}
+                          </label>
+
+                          {field.key === "address" ? (
+                            <textarea
+                              id={field.key}
+                              name={field.key}
+                              value={getValue(field.key)}
+                              onChange={handleChange}
+                              rows={2}
+                              className={inputClass}
+                            />
+                          ) : (
+                            <input
+                              id={field.key}
+                              name={field.key}
+                              type={field.key === "email" ? "email" : "text"}
+                              value={getValue(field.key)}
+                              onChange={handleChange}
+                              className={inputClass}
+                            />
+                          )}
+                        </div>
+                      );
+                    })}
+
+                    {/* دسته‌بندی */}
+                    {section.title === "اطلاعات عمومی" && (
+                      <div>
+                        <label htmlFor="category" className={labelClass}>
+                          <FiPackage size={16} className="text-emerald-600" />
+                          دسته‌بندی
+                        </label>
+
+                        <select
+                          id="category"
+                          name="category"
+                          value={getValue("category")}
+                          onChange={handleChange}
+                          className={inputClass}
+                        >
+                          <option value="نوشیدنی">نوشیدنی</option>
+                          <option value="مواد غذایی">مواد غذایی</option>
+                          <option value="لوازم مصرفی">لوازم مصرفی</option>
+                          <option value="بهداشتی">بهداشتی</option>
+                          <option value="سایر">سایر</option>
+                        </select>
+                      </div>
+                    )}
+                  </div>
+                </section>
+              );
+            })}
+
+            {/* شرایط همکاری */}
+            <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+              <div className="flex items-center gap-2 border-b border-slate-100 bg-gradient-to-l from-emerald-50 to-slate-50 px-4 py-3.5">
+                <FiCreditCard size={19} className="text-emerald-600" />
+
+                <h3 className="text-sm font-bold text-slate-800">
+                  شرایط همکاری
+                </h3>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 p-4 sm:p-5">
+                <div>
+                  <label htmlFor="paymentTerm" className={labelClass}>
+                    <FiCreditCard size={16} className="text-emerald-600" />
+                    شرایط پرداخت
+                  </label>
+
+                  <select
+                    id="paymentTerm"
+                    name="paymentTerm"
+                    value={getValue("paymentTerm")}
+                    onChange={handleChange}
+                    className={inputClass}
+                  >
+                    <option value="نقدی">نقدی</option>
+                    <option value="7 روزه">7 روزه</option>
+                    <option value="15 روزه">15 روزه</option>
+                    <option value="30 روزه">30 روزه</option>
+                    <option value="45 روزه">45 روزه</option>
+                    <option value="60 روزه">60 روزه</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label htmlFor="description" className={labelClass}>
+                    <FiFileText size={16} className="text-emerald-600" />
+                    توضیحات
+                  </label>
+
+                  <textarea
+                    id="description"
+                    name="description"
+                    value={getValue("description")}
+                    onChange={handleChange}
+                    rows={3}
+                    className={inputClass}
+                  />
+                </div>
+              </div>
+            </section>
+          </main>
+
+          {/* Footer */}
+          <footer className="flex shrink-0 items-center justify-between gap-3 border-t border-slate-200 bg-white px-5 py-4 sm:px-7">
+            <span className="text-xs text-slate-400">
+              کد تأمین‌کننده: {supplierEdit?.code}
+            </span>
+
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={changeShoeEdit}
+                className="cursor-pointer rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-600 transition hover:bg-slate-50"
               >
-                <option>نوشیدنی</option>
-                <option>مواد غذایی</option>
-                <option>لوازم مصرفی</option>
-                <option>بهداشتی</option>
-                <option>سایر</option>
-              </select>
-            </div>
+                انصراف
+              </button>
 
-            <Field
-              label="تاریخ شروع همکاری"
-              value={supplier.startDate}
-              icon={FiCalendar}
-            />
-          </Section>
-
-          <Section title="اطلاعات تماس" icon={FiPhone}>
-            <Field
-              label="نام مسئول ارتباط"
-              value={supplier.contactPerson}
-              icon={FiUser}
-            />
-
-            <Field
-              label="شماره موبایل"
-              value={supplier.mobile}
-              icon={FiPhone}
-            />
-
-            <Field label="تلفن ثابت" value={supplier.phone} icon={FiPhone} />
-
-            <Field label="ایمیل" value={supplier.email} icon={FiMail} />
-          </Section>
-
-          <Section title="اطلاعات مکانی" icon={FiMapPin}>
-            <Field label="استان" value={supplier.province} icon={FiMapPin} />
-
-            <Field label="شهر" value={supplier.city} icon={FiMapPin} />
-
-            <Field
-              label="کد پستی"
-              value={supplier.postalCode}
-              icon={FiMapPin}
-            />
-
-            <Field
-              label="آدرس کامل"
-              value={supplier.address}
-              icon={FiMapPin}
-              full
-            />
-          </Section>
-
-          <Section title="شرایط همکاری" icon={FiCreditCard}>
-            <div className="sm:col-span-2">
-              <label className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
-                <FiCreditCard size={16} className="text-emerald-600" />
-                شرایط پرداخت
-              </label>
-              <select
-                defaultValue={supplier.paymentTerm}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-emerald-500"
+              <button
+                type="submit"
+                className="rounded-xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
               >
-                <option>نقدی</option>
-                <option>7 روزه</option>
-                <option>15 روزه</option>
-                <option>30 روزه</option>
-                <option>45 روزه</option>
-                <option>60 روزه</option>
-              </select>
+                ذخیره تغییرات
+              </button>
             </div>
-
-            <div className="sm:col-span-2">
-              <label className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
-                <FiFileText size={16} className="text-emerald-600" />
-                توضیحات
-              </label>
-              <textarea
-                defaultValue={supplier.description}
-                rows={3}
-                className="w-full resize-y rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-7 outline-none focus:border-emerald-500 focus:bg-white"
-              />
-            </div>
-          </Section>
-        </main>
-
-        {/* Footer */}
-        <footer className="flex shrink-0 items-center justify-between gap-3 border-t border-slate-200 bg-white px-5 py-4 sm:px-7">
-          <span className="text-xs text-slate-400">
-            کد تأمین‌کننده: {supplier.code}
-          </span>
-
-          <div className="flex gap-3">
-            <button
-              onClick={() => {
-                changeShoeEdit();
-              }}
-              className="rounded-xl cursor-pointer border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-600 transition hover:bg-slate-50"
-            >
-              انصراف
-            </button>
-
-            <button className="rounded-xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700">
-              ذخیره تغییرات
-            </button>
-          </div>
-        </footer>
+          </footer>
+        </form>
       </div>
     </div>
   );
